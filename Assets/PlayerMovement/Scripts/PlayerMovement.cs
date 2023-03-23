@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    public float RunSpeed;
 
     public float groundDrag;
 
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     bool readyToJump;
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode RunKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -89,6 +91,10 @@ public class PlayerMovement : MonoBehaviour
         if(grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed *10f, ForceMode.Force);
+            if(Input.GetKey(RunKey))
+            {
+                rb.AddForce(moveDirection.normalized * RunSpeed *10f, ForceMode.Force);
+            }
         }   
 
         else if(!grounded)
@@ -102,9 +108,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         // limiting speed
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > moveSpeed && !Input.GetKey(RunKey))
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+        else if(flatVel.magnitude > RunSpeed && Input.GetKey(RunKey))
+        {
+            Vector3 limitedVel = flatVel.normalized * RunSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }

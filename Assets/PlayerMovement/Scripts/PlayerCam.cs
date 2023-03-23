@@ -8,9 +8,12 @@ public class PlayerCam : MonoBehaviour
     public float senseY;
 
     public Transform orientation;
+    public Transform PlayerObj;
 
     float xRotation;
     float yRotation;
+
+    public float rotationSpeed;
 
     private void Start()
     {
@@ -31,5 +34,11 @@ public class PlayerCam : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        // Orientation of player
+
+        Vector3 inputDir =  orientation.forward * mouseY + orientation.right * mouseX;
+
+        PlayerObj.forward = Vector3.Slerp(PlayerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
     }
 }

@@ -225,6 +225,8 @@ MonoBehaviour:
   senseX: 400
   senseY: 400
   orientation: {fileID: 347689864}
+  PlayerObj: {fileID: 556211666}
+  rotationSpeed: 0
 --- !u!81 &357665530
 AudioListener:
   m_ObjectHideFlags: 0
@@ -341,11 +343,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  RunSpeed: 0
   groundDrag: 5
   jumpForce: 7
   jumpCooldown: 1
   airMultiplier: 7
   jumpKey: 32
+  RunKey: 304
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
