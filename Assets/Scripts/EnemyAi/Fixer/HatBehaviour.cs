@@ -31,8 +31,8 @@ public class HatBehaviour : MonoBehaviour
     }
 
     void Throw(){
-        parentFixer.SetBehaviour(MovementInput.state.findhat);
-        this.gameObject.transform.parent=null;
+        parentFixer.BecomeScared();
+        this.gameObject.transform.parent=null;//*********Change to hand of Player********//
         hat_rigid.isKinematic=false;
         thrown=true;
 
@@ -44,17 +44,16 @@ public class HatBehaviour : MonoBehaviour
         transform.localPosition=originPos;
         transform.localRotation=originRot;
         thrown=false;
-        parentFixer=transform.GetComponentInParent<MovementInput>();
-        Debug.Log("Before Change: "+parentFixer.behaviour);
-        Debug.Log(parentFixer.behaviour);
-        parentFixer.SetBehaviour(MovementInput.state.roam);
-        Debug.Log("After Change: "+parentFixer.behaviour);
-
     }
 
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag=="Fixer" && thrown){
             Pickup(other);
+        }
+        if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&&parentFixer.behaviour==MovementInput.state.scared){
+            Debug.Log("HatGrounded");
+            parentFixer.target=this.transform;
+            parentFixer.FindHat();
         }
         // if (other.gameObject.tag=="Player" && !thrown){
         //     Throw();

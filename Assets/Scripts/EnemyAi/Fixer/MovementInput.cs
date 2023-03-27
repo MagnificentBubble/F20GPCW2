@@ -55,16 +55,29 @@ public class MovementInput : MonoBehaviour {
 		targetIndex=Random.Range(0,6);
 		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
-		// hatPrefab=Resources.Load("Prefabs/Hat") as GameObject;
-		// GameObject ConsHat=Instantiate(hatPrefab);
-		//make hat detachtable
 		behaviour=state.roam;
+		anim.SetFloat("Speed",3.5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Debug.Log(behaviour);
-		Move ();
+		switch(behaviour){
+			case state.roam: 
+				Move ();
+				break;
+			case state.findhat: 
+				Move ();
+				break;
+			case state.scared:
+				break;
+			case state.pickup:
+				Pickup ();
+				break;
+			case state.fix:
+				//***********INSERT FIX METHOD***********************//
+				break;
+		}
 
         // isGrounded = controller.isGrounded;
         // if (isGrounded)
@@ -84,22 +97,22 @@ public class MovementInput : MonoBehaviour {
 	void Move(){
 		if(agent.remainingDistance<agent.stoppingDistance+bufferDistance){
 			if(target==hattarget){
-				anim.SetTrigger("pickup");
-				AnimWait();
 				target=null;
-
+				anim.SetTrigger("pickup");
+				agent.isStopped=true;
+				SetBehaviour(state.pickup);
 			}
-			else if (behaviour==state.findhat){
-				target=hattarget;
+			else if (target.gameObject.tag=="Broken"){
+				SetBehaviour(state.fix);
+				anim.SetTrigger("fix");
+				agent.isStopped=true;
 			}
 			else {
-			targetIndex=Random.Range(0,6);
-			TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
-			target=GameObject.Find(TargetLocations).transform;
+				FindNewTarget();
 			}
-			
+
 		}
-		if(behaviour==state.findhat || behaviour==state.roam &&target!=null	){
+		if(target!=null){
 			speed=((agent.velocity.magnitude-3.5f)/2.5f);
 			destination=target.position;
 			agent.destination=destination;
@@ -113,11 +126,36 @@ public class MovementInput : MonoBehaviour {
 		
 	}
 
-	IEnumerator AnimWait(){
-		yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length+anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
-		anim.SetTrigger("normal");
+	public void FindNewTarget(){
+		targetIndex=Random.Range(0,6);
+		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
+		target=GameObject.Find(TargetLocations).transform;
+	}
+	private void Pickup(){
+		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
+			anim.SetTrigger("normal");
+			SetBehaviour(state.roam);
+			FindNewTarget();
+			agent.isStopped=false;
+		}
+
 	}
 
+	void OnTriggerEnter(Collider other) {
+		 if (other.gameObject.tag=="Broken" && behaviour==state.roam){
+			target=other.transform;
+        }
+	}
 
+	public void BecomeScared (){
+		SetBehaviour(state.scared);
+		agent.isStopped=true;
+		anim.SetTrigger("dead");
+	}
+
+	public void FindHat(){
+		SetBehaviour(state.findhat);
+		agent.isStopped=false;
+	}
 
 }
