@@ -34,7 +34,6 @@ public class HatBehaviour : MonoBehaviour
         parentFixer.BecomeScared();
         this.gameObject.transform.parent=null;//*********Change to hand of Player********//
         hat_rigid.isKinematic=false;
-        thrown=true;
 
     }
 
@@ -51,7 +50,7 @@ public class HatBehaviour : MonoBehaviour
             Pickup(other);
         }
         if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&&parentFixer.behaviour==MovementInput.state.scared){
-            Debug.Log("HatGrounded");
+            thrown=true;
             parentFixer.target=this.transform;
             parentFixer.FindHat();
         }
