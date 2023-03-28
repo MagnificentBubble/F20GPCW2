@@ -17,8 +17,8 @@ public class Destruction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.GetComponentInParent<Health>().HP < DestructionStages[_currentStage].HPThreshold && _currentStage != DestructionStages.Length - 1) destroyStage();
-        if (this.GetComponentInParent<Health>().HP > DestructionStages[_currentStage - 1].HPThreshold && _currentStage != 0) fixStage();
+        if (this.GetComponentInParent<Health>().HP < DestructionStages[CurrentStage].HPThreshold && CurrentStage != DestructionStages.Length - 1) destroyStage();
+        if (this.GetComponentInParent<Health>().HP > DestructionStages[CurrentStage - 1].HPThreshold && CurrentStage != 0) fixStage();
 
     }
 
@@ -44,12 +44,12 @@ public class Destruction : MonoBehaviour
     }
 
     private void destroyStage() {
-        _currentStage += 1;
-        swapMesh(_currentStage);
+        CurrentStage += 1;
+        swapMesh(CurrentStage);
     }
 
     private void fixStage() {
-        _currentStage -=  1;
-        swapMesh(_currentStage);
+        CurrentStage -=  1;
+        swapMesh(CurrentStage);
     }
 }
