@@ -16,7 +16,6 @@ public class MovementInput_Cop : MonoBehaviour {
 	public Vector3 destination;
 	public float desiredRotationSpeed = 0.1f;
 	public Animator anim;
-	public Camera cam;
 	public NavMeshAgent agent;
 	public Transform target;
 	public Transform playertarget;
@@ -42,7 +41,6 @@ public class MovementInput_Cop : MonoBehaviour {
 	void Start () {
 		agent=this.GetComponent<NavMeshAgent>();
 		anim = this.GetComponent<Animator> ();
-		cam = Camera.main;
 		targetIndex=Random.Range(0,6);
 		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
@@ -111,5 +109,8 @@ public class MovementInput_Cop : MonoBehaviour {
         }
 	}
 
+	public void AlertCop(){
+		SetBehaviour(state.arrest);
+	}
 
 }
