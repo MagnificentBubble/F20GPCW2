@@ -359,7 +359,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5717370821310611589
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -367,16 +367,24 @@ Animator:
   m_GameObject: {fileID: 1696014694992928748}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5c4f8349e4655be43ab6121bd5ae8e4d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Root'\n\tTransform 'Left_Ring_Finger_Joint_01b'\n\tTransform
+    'Right_Shoulder_Joint_01'\n\tTransform 'Right_Upper_Arm_Joint_01'\n\tTransform
+    'Right_Index_Finger_Joint_01a'\n\tTransform 'Left_Index_Finger_Joint_01a'\n\tTransform
+    'Right_Ankle_Joint_01'\n\tTransform 'Left_Middle_Finger_Joint_01a'\n\tTransform
+    'Right_Thigh_Joint_01'\n\tTransform 'Right_Wrist_Joint_01'\n\tand more ...\n\tFrom
+    animation clip 'mixamo.com'\n\tFrom animation clip 'mixamo.com'\n\tFrom animation
+    clip 'mixamo.com'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1759838451836578093
 GameObject:
   m_ObjectHideFlags: 0
