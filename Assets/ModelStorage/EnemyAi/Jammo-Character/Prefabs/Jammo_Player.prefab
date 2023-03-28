@@ -1917,6 +1917,7 @@ GameObject:
   - component: {fileID: 4757836856755875625}
   - component: {fileID: 4757836856755875626}
   - component: {fileID: 588541306397113051}
+  - component: {fileID: 3293967567291665282}
   m_Layer: 0
   m_Name: Jammo_Player
   m_TagString: Untagged
@@ -1974,7 +1975,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3541754002163558908}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f8af0573aab879f4c9cd410a4e0a39f9, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
   m_Controller: {fileID: 9100000, guid: 535d24752e3d6444da644e79e90ec2ca, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -2038,16 +2039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa9f165e2b4f1a4f9522501717c095d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: 10
-  InputX: 0
-  InputZ: 0
-  desiredMoveDirection: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
-  blockRotationPlayer: 0
   desiredRotationSpeed: 0.3
   anim: {fileID: 0}
-  hatPrefab: {fileID: 0}
-  allowPlayerRotation: 0.1
   cam: {fileID: 0}
   agent: {fileID: 0}
   target: {fileID: 0}
@@ -2056,12 +2050,8 @@ MonoBehaviour:
   targetIndex: 0
   isGrounded: 0
   behaviour: 0
-  HorizontalAnimSmoothTime: 0.2
-  VerticalAnimTime: 0.2
-  StartAnimTime: 0.3
-  StopAnimTime: 0.15
+  StartAnimTime: 0
   speed: 0
-  bufferDistance: 0
   verticalVel: -0.5
 --- !u!195 &588541306397113051
 NavMeshAgent:
@@ -2073,7 +2063,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4.2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2085,6 +2075,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &3293967567291665282
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541754002163558908}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3921334144448749991
 GameObject:
   m_ObjectHideFlags: 0
@@ -5872,6 +5875,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2748655467362594803
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2447180321721907043}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.813095, y: 0.3873558, z: 0.8498285}
+  m_Center: {x: -8.553893e-25, y: 0.193678, z: -0.000000055040097}
 --- !u!64 &4252889492825115239
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5899,16 +5915,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hat_rigid: {fileID: 0}
---- !u!65 &2748655467362594803
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447180321721907043}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.813095, y: 0.3873558, z: 0.8498285}
-  m_Center: {x: -8.553893e-25, y: 0.193678, z: -0.000000055040097}
