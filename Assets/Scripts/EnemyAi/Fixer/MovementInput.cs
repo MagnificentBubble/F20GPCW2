@@ -71,7 +71,7 @@ public class MovementInput : MonoBehaviour {
 				}
 				break;
 			case state.fix:
-				//***********INSERT FIX METHOD***********************//
+				FixObject();
 				break;
 		}
     }
@@ -121,7 +121,7 @@ public class MovementInput : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		 if (other.gameObject.tag=="Broken" && behaviour==state.roam){
+		 if (other.GetComponent<Destruction>().CurrentStage!=0 && behaviour==state.roam){
 			target=other.transform;
         }
 	}
@@ -132,6 +132,13 @@ public class MovementInput : MonoBehaviour {
 
 	public void FindHat(){
 		SetBehaviour(state.findhat);
+	}
+
+	private void FixObject(){
+		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 2 >=0.1){
+			target.GetComponent<Health>().Heal(3.5f);
+		}
+
 	}
 
 }
