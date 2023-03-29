@@ -380,8 +380,8 @@ Animator:
     'Right_Index_Finger_Joint_01a'\n\tTransform 'Left_Index_Finger_Joint_01a'\n\tTransform
     'Right_Ankle_Joint_01'\n\tTransform 'Left_Middle_Finger_Joint_01a'\n\tTransform
     'Right_Thigh_Joint_01'\n\tTransform 'Right_Wrist_Joint_01'\n\tand more ...\n\tFrom
-    animation clip 'mixamo.com'\n\tFrom animation clip 'mixamo.com'\n\tFrom animation
-    clip 'mixamo.com'"
+    animation clip 'Idle'\n\tFrom animation clip 'Walking'\n\tFrom animation clip
+    'Running'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0

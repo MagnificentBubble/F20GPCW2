@@ -34,12 +34,17 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    private Animator anim;
+    private bool isRunning;
+
     private void Start() 
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
         readyToJump = true;
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update() 
@@ -49,6 +54,20 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
+
+        Vector3 velocity = rb.velocity;
+
+        anim.SetFloat("isWalking", velocity.magnitude);
+
+        if (Input.GetKey(RunKey))
+        {
+            isRunning = true;
+        }
+        else 
+        {
+            isRunning = false;
+        }
+        
 
         // drag
 
