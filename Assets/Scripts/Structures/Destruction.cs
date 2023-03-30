@@ -10,20 +10,35 @@ public class Destruction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //sortStages();
         CurrentStage = 0;
-        sortStages();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (this.GetComponentInParent<Health>().HP < DestructionStages[CurrentStage].HPThreshold && CurrentStage != DestructionStages.Length - 1) destroyStage();
-        if (this.GetComponentInParent<Health>().HP > DestructionStages[CurrentStage - 1].HPThreshold && CurrentStage != 0) fixStage();
+        if (CurrentStage != 0) { if (this.GetComponentInParent<Health>().HP > DestructionStages[CurrentStage - 1].HPThreshold) fixStage(); };
 
     }
 
     private void sortStages() {
         DestructionStage _temp;
+        bool swapped = true;
+
+        while (swapped) {
+            swapped = false;
+            for (int i = 0; i < (DestructionStages.Length - 1); i++) {
+                if (DestructionStages[i].HPThreshold < DestructionStages[i+1].HPThreshold)
+                {
+                    _temp = DestructionStages[i];
+                    DestructionStages[i] = DestructionStages[i+1];
+                    DestructionStages[i+1] = _temp;
+                    swapped = true;
+                }
+            }
+        }
+
 
         for (int i = 0; i < DestructionStages.Length; i++)
         {
@@ -40,7 +55,7 @@ public class Destruction : MonoBehaviour
 
     private void swapMesh(int stage) {
         //Mesh _newMesh = DestructionStages[stage].Mesh;
-        Debug.LogError("Not Implemented: Mesh Swap");
+        this.gameObject.GetComponent<MeshFilter>().mesh = DestructionStages[stage].Mesh;
     }
 
     private void destroyStage() {
