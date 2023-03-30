@@ -8,10 +8,7 @@ using UnityEngine.AI;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SphereCollider))]
-public class MovementInput : MonoBehaviour {
+public class MovementInput_Cop : MonoBehaviour {
 
     [Space]
 
@@ -20,12 +17,11 @@ public class MovementInput : MonoBehaviour {
 	public Animator anim;
 	public NavMeshAgent agent;
 	public Transform target;
-	public Transform hattarget;
+	public Transform playertarget;
 	public string TargetLocations;
 	public int targetIndex;
 	public bool isGrounded;
-
-	public enum state {roam,fix,findhat, scared, pickup};
+	public enum state {roam,chase, arrest};
 	public state behaviour;
 
     [Header("Animation Smoothing")]
@@ -34,12 +30,10 @@ public class MovementInput : MonoBehaviour {
 	[Range(2f, 5f)]
 	public float speed;
 	[Range(0f, 1f)]
-	private float bufferDistance=0f;
-	private float[] buffers={1.0f, 3.0f, 0.1f};
+	private float bufferDistance=1.0f;
 
     public float verticalVel;
     private Vector3 moveVector;
-
 	private float[] animSpeeds={3.5f, 3.0f};
 
 	// Use this for initialization
@@ -50,7 +44,7 @@ public class MovementInput : MonoBehaviour {
 		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
 		SetBehaviour(state.roam);
-		anim.SetFloat("Speed",3.5f);
+		playertarget=GameObject.FindGameObjectWithTag("Player").transform;
 		}
 	
 	// Update is called once per frame
@@ -59,37 +53,19 @@ public class MovementInput : MonoBehaviour {
 			case state.roam: 
 				Move ();
 				break;
-			case state.findhat: 
-				Move ();
+			case state.chase: 
+				Chase ();
 				break;
-			case state.scared:
-				break;
-			case state.pickup:
-				if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
-					Debug.Log("AnimDone");
-					SetBehaviour(state.roam);
-					FindNewTarget();
-				}
-				break;
-			case state.fix:
-				FixObject();
+			case state.arrest: 
+				Arrest();
 				break;
 		}
+		if (Input.GetKeyDown(KeyCode.Alpha0)){AlertCop();}
     }
 
 	void Move(){
 		if(agent.remainingDistance<agent.stoppingDistance+bufferDistance){
-			if(target==hattarget){
-				target=null;
-				SetBehaviour(state.pickup);
-			}
-			else if (target.gameObject.tag=="Broken"){
-				SetBehaviour(state.fix);
-			}
-			else {
-				FindNewTarget();
-			}
-
+			FindNewTarget();
 		}
 		if(target!=null){
 			speed=((agent.velocity.magnitude-3.5f)/2.5f);
@@ -97,18 +73,34 @@ public class MovementInput : MonoBehaviour {
 			agent.destination=destination;
 			anim.SetFloat ("Blend", speed, StartAnimTime, Time.deltaTime);
 		}
-		
 	}
 
+	void Chase(){
+		if(agent.remainingDistance<agent.stoppingDistance+bufferDistance){
+			if(target==playertarget){
+				target=null;
+				SetBehaviour(state.arrest);
+			}
+		}
+		if(target!=null){
+			speed=((agent.velocity.magnitude-3.5f)/2.5f)*2;
+			destination=target.position;
+			agent.destination=destination;
+			anim.SetFloat ("Blend", speed, StartAnimTime, Time.deltaTime);
+		}
+	}
+	void Arrest(){
+		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
+			SetBehaviour(state.roam);
+			FindNewTarget();
+		}
+	}
 	public void SetBehaviour(state newstate){
 		string stateString= newstate.ToString();
 		behaviour=newstate;
 		anim.SetTrigger(stateString);
 		int index =(int)behaviour;
-		agent.isStopped=(behaviour!=state.roam && behaviour!=state.findhat);
-		if (index<3){
-			bufferDistance=buffers[index];
-		}
+		agent.isStopped=(behaviour==state.arrest);
 		if (index<2){
 			anim.SetFloat("Speed",animSpeeds[index]);
 		}
@@ -122,27 +114,13 @@ public class MovementInput : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if(other.GetComponent<Destruction>()!=null){
-			if (other.GetComponent<Destruction>().CurrentStage!=0 && behaviour==state.roam){
-				target=other.transform;
-        	}
-		}
-		 
+		 if (other.gameObject.tag=="Player" && behaviour==state.roam){
+			AlertCop();
+        }
 	}
 
-	public void BecomeScared (){
-		SetBehaviour(state.scared);
+	public void AlertCop(){
+		target=playertarget;
+		SetBehaviour(state.chase);
 	}
-
-	public void FindHat(){
-		SetBehaviour(state.findhat);
-	}
-
-	private void FixObject(){
-		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 2 >=0.1){
-			target.GetComponent<Health>().Heal(3.5f);
-		}
-
-	}
-
 }

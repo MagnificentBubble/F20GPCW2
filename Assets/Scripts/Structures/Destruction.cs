@@ -5,20 +5,20 @@ using UnityEngine;
 public class Destruction : MonoBehaviour
 {
     [SerializeField] DestructionStage[] DestructionStages;
-    private int _currentStage;
+    public int CurrentStage;
 
     // Start is called before the first frame update
     void Start()
     {
-        _currentStage = 0;
+        CurrentStage = 0;
         sortStages();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (this.GetComponentInParent<Health>().HP < DestructionStages[_currentStage].HPThreshold && _currentStage != DestructionStages.Length - 1) DestroyStage();
-        if (this.GetComponentInParent<Health>().HP > DestructionStages[_currentStage - 1].HPThreshold && _currentStage != 0) FixStage();
+        if (this.GetComponentInParent<Health>().HP < DestructionStages[CurrentStage].HPThreshold && CurrentStage != DestructionStages.Length - 1) destroyStage();
+        if (this.GetComponentInParent<Health>().HP > DestructionStages[CurrentStage - 1].HPThreshold && CurrentStage != 0) fixStage();
 
     }
 
@@ -43,13 +43,13 @@ public class Destruction : MonoBehaviour
         Debug.LogError("Not Implemented: Mesh Swap");
     }
 
-    public void DestroyStage() {
-        _currentStage += 1;
-        swapMesh(_currentStage);
+    private void destroyStage() {
+        CurrentStage += 1;
+        swapMesh(CurrentStage);
     }
 
-    public void FixStage() {
-        _currentStage -=  1;
-        swapMesh(_currentStage);
+    private void fixStage() {
+        CurrentStage -=  1;
+        swapMesh(CurrentStage);
     }
 }

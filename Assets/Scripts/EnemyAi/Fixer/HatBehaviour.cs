@@ -6,37 +6,60 @@ public class HatBehaviour : MonoBehaviour
 {
     public Rigidbody hat_rigid;
 
+    private MovementInput parentFixer;
+    private Transform parent;
+
+    private Vector3 originPos;
+
+    private Quaternion originRot;
+
     private bool thrown=false;
     // Start is called before the first frame update
     void Start()
     {
         hat_rigid=this.GetComponent<Rigidbody>();
         hat_rigid.isKinematic=true;   
+        parent=transform.parent;
+        parentFixer=parent.GetComponentInParent<MovementInput>();
+        parentFixer.hattarget=transform;
+        originPos=transform.localPosition;
+        originRot=transform.localRotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-    if (Input.GetKeyDown(KeyCode.Alpha0)){Throw();}
+        if (Input.GetKeyDown(KeyCode.Space)){Throw();}
     }
 
     void Throw(){
-        this.gameObject.transform.Find("Jammo_Player").GetComponent<MovementInput>().behaviour=MovementInput.state.scared;
-        this.gameObject.transform.parent=null;
+        parentFixer.BecomeScared();
+        this.gameObject.transform.parent=null;//*********Change to hand of Player********//
         hat_rigid.isKinematic=false;
-        thrown=true;
+
     }
 
     void Pickup(Collider other){
-        this.gameObject.transform.parent=other.transform.Find("mixamorig:Head");
+        this.gameObject.transform.parent=parent;
+        hat_rigid.isKinematic=true;
+        transform.localPosition=originPos;
+        transform.localRotation=originRot;
+        thrown=false;
     }
 
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag=="Fixer" && thrown){
             Pickup(other);
         }
+        if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&&parentFixer.behaviour==MovementInput.state.scared){
+            thrown=true;
+            parentFixer.target=this.transform;
+            parentFixer.FindHat();
+        }
         // if (other.gameObject.tag=="Player" && !thrown){
         //     Throw();
         // }
     }
 }
+
+//Manage animation timings. Character should wait at hat until picked up
