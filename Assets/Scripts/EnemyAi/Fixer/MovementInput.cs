@@ -20,12 +20,13 @@ public class MovementInput : MonoBehaviour {
 	public Animator anim;
 	public GameObject hatPrefab;
 	public float allowPlayerRotation = 0.1f;
-	public Camera cam;
+	
 	public NavMeshAgent agent;
 	public Transform target;
 	public string TargetLocations;
 	public int targetIndex;
 	public bool isGrounded;
+
 	public enum state {fix, scared, findhat};
 	public state behaviour;
 
@@ -50,7 +51,7 @@ public class MovementInput : MonoBehaviour {
 	void Start () {
 		agent=this.GetComponent<NavMeshAgent>();
 		anim = this.GetComponent<Animator> ();
-		cam = Camera.main;
+		
 		targetIndex=Random.Range(0,6);
 		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
