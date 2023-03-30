@@ -13,6 +13,9 @@ public class HatBehaviour : MonoBehaviour
 
     private Quaternion originRot;
 
+   
+    public float radius;
+
     private bool thrown=false;
     // Start is called before the first frame update
     void Start()
@@ -30,9 +33,10 @@ public class HatBehaviour : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)){Throw();}
+        CheckForPlayer();
     }
 
-    void Throw(){
+   public void Throw(){
         parentFixer.BecomeScared();
         this.gameObject.transform.parent=null;//*********Change to hand of Player********//
         hat_rigid.isKinematic=false;
@@ -60,6 +64,20 @@ public class HatBehaviour : MonoBehaviour
         //     Throw();
         // }
     }
+
+    private void CheckForPlayer()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+
+        foreach(Collider c in colliders)
+        {
+            if (c.GetComponent<PlayerMovement>())
+            {
+                Debug.Log("Hi");
+            }
+        }
+    }
+
 }
 
 //Manage animation timings. Character should wait at hat until picked up

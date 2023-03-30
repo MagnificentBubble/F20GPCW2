@@ -38,7 +38,12 @@ public class PlayerCam : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
         // transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        player.rotation = Quaternion.Euler(0, yRotation, 0);
+        // player.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        // var cameraRotation = transform.rotation;
+
+        // Rotate the player in the direction of the camera
+        // transform.Rotate(cameraRotation.eulerAngles.z * rotationSpeed * Time.deltaTime);
 
         // Orientation of player
         // Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
