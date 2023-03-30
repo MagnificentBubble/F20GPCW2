@@ -7,6 +7,7 @@ public class HatBehaviour : MonoBehaviour
     public Rigidbody hat_rigid;
 
     private MovementInput parentFixer;
+    private Transform parent;
 
     private Vector3 originPos;
 
@@ -18,7 +19,8 @@ public class HatBehaviour : MonoBehaviour
     {
         hat_rigid=this.GetComponent<Rigidbody>();
         hat_rigid.isKinematic=true;   
-        parentFixer=transform.GetComponentInParent<MovementInput>();
+        parent=transform.parent;
+        parentFixer=parent.GetComponentInParent<MovementInput>();
         parentFixer.hattarget=transform;
         originPos=transform.localPosition;
         originRot=transform.localRotation;
@@ -38,7 +40,7 @@ public class HatBehaviour : MonoBehaviour
     }
 
     void Pickup(Collider other){
-        this.gameObject.transform.parent=GameObject.Find("mixamorig:Head").transform;
+        this.gameObject.transform.parent=parent;
         hat_rigid.isKinematic=true;
         transform.localPosition=originPos;
         transform.localRotation=originRot;

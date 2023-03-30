@@ -8,7 +8,6 @@ using UnityEngine.AI;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
-[RequireComponent(typeof(CharacterController))]
 public class MovementInput_Cop : MonoBehaviour {
 
     [Space]
@@ -45,6 +44,7 @@ public class MovementInput_Cop : MonoBehaviour {
 		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
 		SetBehaviour(state.roam);
+		playertarget=GameObject.FindGameObjectWithTag("Player").transform;
 		}
 	
 	// Update is called once per frame
@@ -54,27 +54,18 @@ public class MovementInput_Cop : MonoBehaviour {
 				Move ();
 				break;
 			case state.chase: 
-				Move ();
+				Chase ();
 				break;
 			case state.arrest: 
-				if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
-					SetBehaviour(state.roam);
-					FindNewTarget();
-				}
+				Arrest();
 				break;
 		}
+		if (Input.GetKeyDown(KeyCode.Alpha0)){AlertCop();}
     }
 
 	void Move(){
 		if(agent.remainingDistance<agent.stoppingDistance+bufferDistance){
-			if(target==playertarget){
-				target=null;
-				SetBehaviour(state.arrest);
-			}
-			else {
-				FindNewTarget();
-			}
-
+			FindNewTarget();
 		}
 		if(target!=null){
 			speed=((agent.velocity.magnitude-3.5f)/2.5f);
@@ -82,15 +73,34 @@ public class MovementInput_Cop : MonoBehaviour {
 			agent.destination=destination;
 			anim.SetFloat ("Blend", speed, StartAnimTime, Time.deltaTime);
 		}
-		
 	}
 
+	void Chase(){
+		if(agent.remainingDistance<agent.stoppingDistance+bufferDistance){
+			if(target==playertarget){
+				target=null;
+				SetBehaviour(state.arrest);
+			}
+		}
+		if(target!=null){
+			speed=((agent.velocity.magnitude-3.5f)/2.5f)*2;
+			destination=target.position;
+			agent.destination=destination;
+			anim.SetFloat ("Blend", speed, StartAnimTime, Time.deltaTime);
+		}
+	}
+	void Arrest(){
+		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
+			SetBehaviour(state.roam);
+			FindNewTarget();
+		}
+	}
 	public void SetBehaviour(state newstate){
 		string stateString= newstate.ToString();
 		behaviour=newstate;
 		anim.SetTrigger(stateString);
 		int index =(int)behaviour;
-		agent.isStopped=(behaviour!=state.arrest);
+		agent.isStopped=(behaviour==state.arrest);
 		if (index<2){
 			anim.SetFloat("Speed",animSpeeds[index]);
 		}
@@ -105,12 +115,12 @@ public class MovementInput_Cop : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		 if (other.gameObject.tag=="Player" && behaviour==state.roam){
-			target=other.transform;
+			AlertCop();
         }
 	}
 
 	public void AlertCop(){
-		SetBehaviour(state.arrest);
+		target=playertarget;
+		SetBehaviour(state.chase);
 	}
-
 }
