@@ -6,7 +6,8 @@ public class ObjectThrow : MonoBehaviour
 {
 
     private Rigidbody ObjectRigidBody;
-    private Collider ObjectCollider;    
+    private Collider ObjectCollider;
+    [SerializeField] public float Damage;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -19,11 +20,20 @@ public class ObjectThrow : MonoBehaviour
         // If it hits the player
         if (collision.gameObject.tag == "Player")
         {
+            collision.gameObject.GetComponent<Health>().Hurt(Damage);
 
             ObjectRigidBody.isKinematic = true;
             ObjectCollider.isTrigger = true;
-        } 
-    
+        }
+        // If it hits the player
+        if (collision.gameObject.tag == "Destructable")
+        {
+            collision.gameObject.GetComponent<Health>().Hurt(Damage);
+
+            ObjectRigidBody.isKinematic = true;
+            ObjectCollider.isTrigger = true;
+        }
+
     }
         
 }
