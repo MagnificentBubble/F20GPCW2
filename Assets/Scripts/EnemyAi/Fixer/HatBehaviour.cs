@@ -74,6 +74,14 @@ public class HatBehaviour : MonoBehaviour
             if (c.GetComponent<PlayerMovement>())
             {
                 Debug.Log("Hi");
+                // Add popup for pickup
+                
+                //adding picking up hat
+                if(Input.GetKey(KeyCode.F))
+                {
+                    //Throw();
+                } 
+                
             }
         }
     }
