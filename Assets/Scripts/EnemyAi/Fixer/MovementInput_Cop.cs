@@ -8,7 +8,6 @@ using UnityEngine.AI;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
-[RequireComponent(typeof(CharacterController))]
 public class MovementInput_Cop : MonoBehaviour {
 
     [Space]

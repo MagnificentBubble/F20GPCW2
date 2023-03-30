@@ -121,9 +121,12 @@ public class MovementInput : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		 if (other.GetComponent<Destruction>().CurrentStage!=0 && behaviour==state.roam){
-			target=other.transform;
-        }
+		if(other.GetComponent<Destruction>()!=null){
+			if (other.GetComponent<Destruction>().CurrentStage!=0 && behaviour==state.roam){
+				target=other.transform;
+        	}
+		}
+		 
 	}
 
 	public void BecomeScared (){
