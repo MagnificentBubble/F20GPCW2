@@ -24,6 +24,7 @@ public class MovementInput : MonoBehaviour {
 	public string TargetLocations;
 	public int targetIndex;
 	public bool isGrounded;
+
 	public enum state {roam,fix,findhat, scared, pickup};
 	public state behaviour;
 
