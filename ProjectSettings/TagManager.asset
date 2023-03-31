@@ -8,6 +8,8 @@ TagManager:
   - Fixer
   - Broken
   - Destructable
+  - Floor
+  - MeleeWeapon
   layers:
   - Default
   - TransparentFX
