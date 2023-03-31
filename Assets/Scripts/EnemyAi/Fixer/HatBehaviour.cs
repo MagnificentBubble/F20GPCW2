@@ -13,6 +13,12 @@ public class HatBehaviour : MonoBehaviour
 
     private Quaternion originRot;
 
+    private GameObject playerHandLoc;
+
+   
+    public float radius;
+
+    private bool hatCollect=false;
     private bool thrown=false;
     // Start is called before the first frame update
     void Start()
@@ -24,18 +30,26 @@ public class HatBehaviour : MonoBehaviour
         parentFixer.hattarget=transform;
         originPos=transform.localPosition;
         originRot=transform.localRotation;
+
+        playerHandLoc = GameObject.FindGameObjectWithTag("HoldLocation");
+        Debug.Log(playerHandLoc);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)){Throw();}
+        //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
+        if(hatCollect==false) {CheckForPlayer();}
     }
 
-    void Throw(){
+   public void Throw(){
         parentFixer.BecomeScared();
-        this.gameObject.transform.parent=null;//*********Change to hand of Player********//
-        hat_rigid.isKinematic=false;
+        this.gameObject.transform.parent=playerHandLoc.transform;//*********Change to hand of Player********//
+        transform.position = playerHandLoc.transform.position;
+        hatCollect=true;
+        Debug.Log("Thrown");
+
+        // hat_rigid.isKinematic=false;
 
     }
 
@@ -44,7 +58,7 @@ public class HatBehaviour : MonoBehaviour
         hat_rigid.isKinematic=true;
         transform.localPosition=originPos;
         transform.localRotation=originRot;
-        thrown=false;
+
     }
 
     private void OnTriggerEnter(Collider other){
@@ -53,6 +67,7 @@ public class HatBehaviour : MonoBehaviour
         }
         if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&&parentFixer.behaviour==MovementInput.state.scared){
             thrown=true;
+            hatCollect=false;
             parentFixer.target=this.transform;
             parentFixer.FindHat();
         }
@@ -60,6 +75,25 @@ public class HatBehaviour : MonoBehaviour
         //     Throw();
         // }
     }
+
+    private void CheckForPlayer()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        foreach(Collider c in colliders)
+        {
+            if (c.GetComponent<PlayerMovement>())
+            {
+                
+                //adding picking up hat
+                if(Input.GetKey(KeyCode.F))
+                {
+                    Throw();
+                } 
+                
+            }
+        }
+    }
+
 }
 
 //Manage animation timings. Character should wait at hat until picked up

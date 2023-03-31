@@ -37,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool isRunning;
 
+    float xRotation;
+    float yRotation;
+
     private void Start() 
     {
         rb = GetComponent<Rigidbody>();
@@ -49,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update() 
     {
+
+        PlayerRotation();
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight *0.5f +0.2f, whatIsGround);
 
@@ -151,6 +156,22 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void PlayerRotation()
+    {
+        // Get mouse input
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime *400;   
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime *400;
+
+        yRotation += mouseX;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        
+
+        transform.rotation = Quaternion.Euler(0, yRotation, 0);
+        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 }
 
