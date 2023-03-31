@@ -104,6 +104,7 @@ public class MovementInput : MonoBehaviour {
 		string stateString= newstate.ToString();
 		behaviour=newstate;
 		anim.SetTrigger(stateString);
+		anim.SetFloat ("Blend", 0, StartAnimTime, Time.deltaTime);
 		int index =(int)behaviour;
 		agent.isStopped=(behaviour!=state.roam && behaviour!=state.findhat);
 		if (index<3){

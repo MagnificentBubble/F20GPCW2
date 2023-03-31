@@ -18,6 +18,7 @@ public class HatBehaviour : MonoBehaviour
    
     public float radius;
 
+    private bool hatCollect=false;
     private bool thrown=false;
     // Start is called before the first frame update
     void Start()
@@ -38,13 +39,15 @@ public class HatBehaviour : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
-        CheckForPlayer();
+        if(hatCollect==false) {CheckForPlayer();}
     }
 
    public void Throw(){
         parentFixer.BecomeScared();
         this.gameObject.transform.parent=playerHandLoc.transform;//*********Change to hand of Player********//
         transform.position = playerHandLoc.transform.position;
+        hatCollect=true;
+        Debug.Log("Thrown");
 
         // hat_rigid.isKinematic=false;
 
@@ -55,7 +58,7 @@ public class HatBehaviour : MonoBehaviour
         hat_rigid.isKinematic=true;
         transform.localPosition=originPos;
         transform.localRotation=originRot;
-        thrown=false;
+
     }
 
     private void OnTriggerEnter(Collider other){
@@ -64,6 +67,7 @@ public class HatBehaviour : MonoBehaviour
         }
         if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&&parentFixer.behaviour==MovementInput.state.scared){
             thrown=true;
+            hatCollect=false;
             parentFixer.target=this.transform;
             parentFixer.FindHat();
         }
@@ -75,13 +79,10 @@ public class HatBehaviour : MonoBehaviour
     private void CheckForPlayer()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-
         foreach(Collider c in colliders)
         {
             if (c.GetComponent<PlayerMovement>())
             {
-                Debug.Log("Hi");
-                // Add popup for pickup
                 
                 //adding picking up hat
                 if(Input.GetKey(KeyCode.F))
