@@ -13,6 +13,8 @@ public class HatBehaviour : MonoBehaviour
 
     private Quaternion originRot;
 
+    private GameObject playerHandLoc;
+
    
     public float radius;
 
@@ -27,19 +29,24 @@ public class HatBehaviour : MonoBehaviour
         parentFixer.hattarget=transform;
         originPos=transform.localPosition;
         originRot=transform.localRotation;
+
+        playerHandLoc = GameObject.FindGameObjectWithTag("HoldLocation");
+        Debug.Log(playerHandLoc);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)){Throw();}
+        //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
         CheckForPlayer();
     }
 
    public void Throw(){
         parentFixer.BecomeScared();
-        this.gameObject.transform.parent=null;//*********Change to hand of Player********//
-        hat_rigid.isKinematic=false;
+        this.gameObject.transform.parent=playerHandLoc.transform;//*********Change to hand of Player********//
+        transform.position = playerHandLoc.transform.position;
+
+        // hat_rigid.isKinematic=false;
 
     }
 
@@ -79,7 +86,7 @@ public class HatBehaviour : MonoBehaviour
                 //adding picking up hat
                 if(Input.GetKey(KeyCode.F))
                 {
-                    //Throw();
+                    Throw();
                 } 
                 
             }
