@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int MaxRubbleInventory = 5;
+
+    [HideInInspector]
+    public int NumberOfRubble;
+    
     void Start()
     {
-        
+        NumberOfRubble = 5;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RubbleCollected()
     {
-        
+        if (NumberOfRubble <= MaxRubbleInventory)
+        {
+            NumberOfRubble++;
+        }
+    }
+
+    public void RubbleThrown()
+    {
+        if (NumberOfRubble > 0)
+        {
+            NumberOfRubble--;
+        }
     }
 }
