@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Throwing : MonoBehaviour
+[RequireComponent(typeof(PlayerInventory))]
+
+public class ThrowingAndMelee : MonoBehaviour
 {
-    /* private PlayerInventory PlayerInv; */
+    private PlayerInventory PlayerInventory;
 
     [Header("References")]
     public Transform Player;
@@ -20,24 +22,40 @@ public class Throwing : MonoBehaviour
     public float throwForce;
     public float throwUpwardForce;
 
+    [Header("Melee")]
+    public KeyCode MeleeKey = KeyCode.Mouse0;
+    private Animator Animator;
+    private GameObject MeleeWeapon;
+    
+
     bool readyToThrow;
 
     private void Start()
         {
             readyToThrow = true;
-            /* PlayerInv = GameObject.FindObjectOfType<PlayerInventory>().GetComponent<PlayerInventory>(); */
-
+            PlayerInventory = GetComponent<PlayerInventory>();
+            Animator = GetComponent<Animator>();
+            MeleeWeapon = GameObject.FindGameObjectWithTag("MeleeWeapon");
         }
 
     private void Update()
     {
-        /* totalThrows = PlayerInv.NumberOfTrash; // total throws are set to the number of trash collected */
-
-
-
-        if((Input.GetKeyDown(throwKey) == true) && (readyToThrow == true))
+        // Throw when number of rubble is not zero
+        if((Input.GetKeyDown(throwKey) == true) && (readyToThrow == true) && (PlayerInventory.NumberOfRubble > 0))
         {
             Throw();
+        }
+
+        // Melee when number of rubble is not zero
+        if(Input.GetKeyDown(MeleeKey) == true && (PlayerInventory.NumberOfRubble > 0))
+        {
+            Animator.SetTrigger("isMelee");
+        }
+
+        // Remove rubble on hand when number of rubble is zero
+        if(PlayerInventory.NumberOfRubble < 1)
+        {
+            MeleeWeapon.SetActive(false);
         }
     }
 
@@ -69,8 +87,7 @@ public class Throwing : MonoBehaviour
 
         totalThrows--;
         
-        
-        /* PlayerInv.TrashThrown(); */
+        PlayerInventory.RubbleThrown();
 
         // implement throwCooldown
         Invoke(nameof(ResetThrow), throwCooldown);
