@@ -497,7 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 556211666}
   AttackPoint: {fileID: 134188126}
-  ObjectToThrow: {fileID: 6352514828618611832, guid: 8311914bb9ca98940933d91769234d14, type: 3}
   totalThrows: 0
   throwCooldown: 0
   throwKey: 324
@@ -693,6 +692,10 @@ PrefabInstance:
     - target: {fileID: 539745478100655087, guid: fb5f2efc3f2e51341882274dcd1db22d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447180321721907043, guid: fb5f2efc3f2e51341882274dcd1db22d, type: 3}
+      propertyPath: m_TagString
+      value: FixerHat
       objectReference: {fileID: 0}
     - target: {fileID: 3541754002163558908, guid: fb5f2efc3f2e51341882274dcd1db22d, type: 3}
       propertyPath: m_Name

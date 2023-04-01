@@ -11,7 +11,7 @@ public class ThrowingAndMelee : MonoBehaviour
     [Header("References")]
     public Transform Player;
     public Transform AttackPoint;
-    public GameObject ObjectToThrow;
+    private Transform ObjectToThrow;
 
     [Header("Settings")]
     public int totalThrows;
@@ -65,10 +65,14 @@ public class ThrowingAndMelee : MonoBehaviour
         readyToThrow = false;
 
         // instantiate object to throw
-        GameObject projectile = Instantiate(ObjectToThrow, AttackPoint.position, Player.rotation);
+        // GameObject projectile = Instantiate(ObjectToThrow, AttackPoint.position, Player.rotation);
+        
 
+        ObjectToThrow = GameObject.FindGameObjectWithTag("HoldLocation").GetComponentInChildren<Transform>();
+        ObjectToThrow.transform.SetParent(null);
+/* 
         // get rigidbody component
-        Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+        Rigidbody projectileRb = ObjectToThrow.GetComponent<Rigidbody>();
 
         // calculate direction
         Vector3 forceDirection = Player.transform.forward;
@@ -90,7 +94,7 @@ public class ThrowingAndMelee : MonoBehaviour
         PlayerInventory.RubbleThrown();
 
         // implement throwCooldown
-        Invoke(nameof(ResetThrow), throwCooldown);
+        Invoke(nameof(ResetThrow), throwCooldown); */
     }
 
     private void ResetThrow()

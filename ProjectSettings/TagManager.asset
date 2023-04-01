@@ -11,6 +11,7 @@ TagManager:
   - Destructable
   - Floor
   - MeleeWeapon
+  - FixerHat
   layers:
   - Default
   - TransparentFX
