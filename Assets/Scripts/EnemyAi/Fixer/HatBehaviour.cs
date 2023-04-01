@@ -93,7 +93,7 @@ public class HatBehaviour : MonoBehaviour
             {
                 
                 //adding picking up hat
-                if(Input.GetKey(KeyCode.F) && PlayerInventory.childExists == false)
+                if(Input.GetKeyDown(KeyCode.F) && PlayerInventory.childExists == false)
                 {
                     Throw();
                 } 
