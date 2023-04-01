@@ -44,8 +44,8 @@ public class HatBehaviour : MonoBehaviour
 
    public void Throw(){
         parentFixer.BecomeScared();
-        this.gameObject.transform.parent=playerHandLoc.transform;//*********Change to hand of Player********//
-        transform.position = playerHandLoc.transform.position;
+        this.gameObject.transform.parent=playerHandLoc.transform;   // Change hat to hand of Player
+        transform.position = playerHandLoc.transform.position;      // Change hat to bottom right of screen
         hatCollect=true;
         Debug.Log("Thrown");
 
