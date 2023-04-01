@@ -11,6 +11,8 @@ TagManager:
   - Destructable
   - Floor
   - MeleeWeapon
+  - FixerSpawnPoint
+  - CopSpawnPoint
   layers:
   - Default
   - TransparentFX
