@@ -50,7 +50,6 @@ public class HatBehaviour : MonoBehaviour
         Debug.Log("Thrown");
 
         // hat_rigid.isKinematic=false;
-
     }
 
     void Pickup(Collider other){
