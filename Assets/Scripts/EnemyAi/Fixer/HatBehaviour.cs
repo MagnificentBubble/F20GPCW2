@@ -17,6 +17,7 @@ public class HatBehaviour : MonoBehaviour
 
     private GameObject playerHandLoc;
 
+    private bool childExists = false;
    
     public float radius;
 
@@ -47,6 +48,10 @@ public class HatBehaviour : MonoBehaviour
         if(hatCollect==false) {CheckForPlayer();}
 
         HatAnim();
+        childExists = transform.parent == playerHandLoc.transform;
+
+
+        Debug.Log(childExists);
     }
 
    public void Throw(){
@@ -103,14 +108,15 @@ public class HatBehaviour : MonoBehaviour
 
     private void HatAnim()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             anim.SetBool("Attack", true);
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            anim.SetBool("Attack",false);
-        }
+        // else if (Input.GetKeyUp(KeyCode.Mouse0))
+        // {
+        //     anim.SetBool("Attack",false);
+        // }
+        else{anim.SetBool("Attack",false);}
     }
 
 }
