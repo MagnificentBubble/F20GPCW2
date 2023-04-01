@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HatBehaviour : MonoBehaviour
 {
+    
+    Animator anim;
     public Rigidbody hat_rigid;
 
     private MovementInput parentFixer;
@@ -23,6 +25,7 @@ public class HatBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        radius = 4;
         hat_rigid=this.GetComponent<Rigidbody>();
         hat_rigid.isKinematic=true;   
         parent=transform.parent;
@@ -30,6 +33,8 @@ public class HatBehaviour : MonoBehaviour
         parentFixer.hattarget=transform;
         originPos=transform.localPosition;
         originRot=transform.localRotation;
+
+        anim = GetComponent<Animator>();
 
         playerHandLoc = GameObject.FindGameObjectWithTag("HoldLocation");
         Debug.Log(playerHandLoc);
@@ -40,6 +45,8 @@ public class HatBehaviour : MonoBehaviour
     {
         //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
         if(hatCollect==false) {CheckForPlayer();}
+
+        HatAnim();
     }
 
    public void Throw(){
@@ -91,6 +98,18 @@ public class HatBehaviour : MonoBehaviour
                 } 
                 
             }
+        }
+    }
+
+    private void HatAnim()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            anim.SetBool("Attack", true);
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            anim.SetBool("Attack",false);
         }
     }
 
