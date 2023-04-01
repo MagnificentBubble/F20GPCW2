@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 357665532}
   m_Layer: 0
   m_Name: PlayerCam
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -609,6 +609,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   orientation: {fileID: 265696155}
+--- !u!114 &556211670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556211663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bd30c383f4ee247b319725bfde861d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxRubbleInventory: 5
+  playerHand: {fileID: 0}
+  NumberOfRubble: 0
 --- !u!4 &614987684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6475462827229814074, guid: de5c6c5ed3a08034481b54ee658e8201, type: 3}
