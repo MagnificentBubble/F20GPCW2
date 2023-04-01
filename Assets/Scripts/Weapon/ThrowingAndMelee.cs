@@ -11,7 +11,7 @@ public class ThrowingAndMelee : MonoBehaviour
     [Header("References")]
     public Transform Player;
     public Transform AttackPoint;
-    public GameObject ObjectToThrow;
+    private GameObject ObjectToThrow;
 
     [Header("Settings")]
     public int totalThrows;
@@ -60,18 +60,24 @@ public class ThrowingAndMelee : MonoBehaviour
     }
 
     private void Throw()
-    {
-        
+    {        
         readyToThrow = false;
-
-        // instantiate object to throw
-        GameObject projectile = Instantiate(ObjectToThrow, AttackPoint.position, Player.rotation);
-
-        // get rigidbody component
-        Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-
-        // calculate direction
-        Vector3 forceDirection = Player.transform.forward;
+        
+        // Refererences
+        Rigidbody projectileRb = GameObject.FindGameObjectWithTag("HoldLocation").GetComponentInChildren<Rigidbody>();
+        Transform ObjectToThrows = GameObject.FindGameObjectWithTag("HoldLocation").GetComponentInChildren<Transform>();
+        
+        // Select ONLY child of HoldPosition component
+        foreach(Transform ObjectToThrow in ObjectToThrows)
+        {
+            if(ObjectToThrow.gameObject.transform.parent != null)
+            {
+                ObjectToThrow.transform.SetParent(null);    // Set to main hierachy 
+            }
+        } 
+        
+        // Calculate direction
+         Vector3 forceDirection = Player.transform.forward;
 
         RaycastHit hit;
 
@@ -79,23 +85,26 @@ public class ThrowingAndMelee : MonoBehaviour
         {
             forceDirection = (hit.point - AttackPoint.position).normalized;
         }
-
-        // add force
+        
+        // Add force to projectile
         Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
 
+        projectileRb.isKinematic = false;
         projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
+              
 
         totalThrows--;
         
-        PlayerInventory.RubbleThrown();
+        // PlayerInventory.RubbleThrown();
 
         // implement throwCooldown
-        Invoke(nameof(ResetThrow), throwCooldown);
+        Invoke(nameof(ResetThrow), throwCooldown);   
+        
+        
     }
 
     private void ResetThrow()
     {
         readyToThrow = true;
     }
-
 }
