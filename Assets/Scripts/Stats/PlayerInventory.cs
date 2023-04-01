@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public int MaxRubbleInventory = 5;
+    static public bool childExists = false;
+
+    public GameObject playerHand;
 
     [HideInInspector]
     public int NumberOfRubble;
@@ -12,6 +15,13 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         NumberOfRubble = 5;
+
+        playerHand = GameObject.FindGameObjectWithTag("HoldLocation");
+    }
+
+    private void Update() 
+    {
+        HandCheck();
     }
 
     public void RubbleCollected()
@@ -28,5 +38,10 @@ public class PlayerInventory : MonoBehaviour
         {
             NumberOfRubble--;
         }
+    }
+
+    public void HandCheck()
+    {
+        childExists = playerHand.transform.childCount > 0;
     }
 }
