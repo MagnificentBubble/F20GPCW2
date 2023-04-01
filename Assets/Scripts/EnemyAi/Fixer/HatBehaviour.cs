@@ -5,7 +5,7 @@ using UnityEngine;
 public class HatBehaviour : MonoBehaviour
 {
     
-    Animator anim;
+    // Animator anim;
     public Rigidbody hat_rigid;
 
     private MovementInput parentFixer;
@@ -33,7 +33,7 @@ public class HatBehaviour : MonoBehaviour
         originPos=transform.localPosition;
         originRot=transform.localRotation;
 
-        anim = GetComponent<Animator>();
+        // anim = GetComponent<Animator>();
 
         playerHandLoc = GameObject.FindGameObjectWithTag("HoldLocation");
         
@@ -45,15 +45,15 @@ public class HatBehaviour : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
         if(hatCollect==false) {CheckForPlayer();}
 
-        HatAnim();
+        // HatAnim();
         Debug.Log(PlayerInventory.childExists);
 
     }
 
    public void Throw(){
         parentFixer.BecomeScared();
-        this.gameObject.transform.parent=playerHandLoc.transform;//*********Change to hand of Player********//
-        transform.position = playerHandLoc.transform.position;
+        this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player
+        transform.position = playerHandLoc.transform.position;      // Change to HoldLocation parent
         hatCollect=true;
         Debug.Log("Thrown");
 
@@ -102,18 +102,18 @@ public class HatBehaviour : MonoBehaviour
         }
     }
 
-    private void HatAnim()
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            anim.SetBool("Attack", true);
-        }
-        // else if (Input.GetKeyUp(KeyCode.Mouse0))
-        // {
-        //     anim.SetBool("Attack",false);
-        // }
-        else{anim.SetBool("Attack",false);}
-    }
+    // private void HatAnim()
+    // {
+    //     if (Input.GetKey(KeyCode.L))
+    //     {
+    //         anim.SetBool("Attack", true);
+    //     }
+    //     // else if (Input.GetKeyUp(KeyCode.Mouse0))
+    //     // {
+    //     //     anim.SetBool("Attack",false);
+    //     // }
+    //     else{anim.SetBool("Attack",false);}
+    // }
 
 }
 
