@@ -16,8 +16,6 @@ public class HatBehaviour : MonoBehaviour
     private Quaternion originRot;
 
     private GameObject playerHandLoc;
-
-    private bool childExists = false;
    
     public float radius;
 
@@ -38,7 +36,7 @@ public class HatBehaviour : MonoBehaviour
         anim = GetComponent<Animator>();
 
         playerHandLoc = GameObject.FindGameObjectWithTag("HoldLocation");
-        Debug.Log(playerHandLoc);
+        
     }
 
     // Update is called once per frame
@@ -48,10 +46,8 @@ public class HatBehaviour : MonoBehaviour
         if(hatCollect==false) {CheckForPlayer();}
 
         HatAnim();
-        childExists = transform.parent == playerHandLoc.transform;
+        Debug.Log(PlayerInventory.childExists);
 
-
-        Debug.Log(childExists);
     }
 
    public void Throw(){
@@ -97,7 +93,7 @@ public class HatBehaviour : MonoBehaviour
             {
                 
                 //adding picking up hat
-                if(Input.GetKey(KeyCode.F))
+                if(Input.GetKey(KeyCode.F) && PlayerInventory.childExists == false)
                 {
                     Throw();
                 } 
