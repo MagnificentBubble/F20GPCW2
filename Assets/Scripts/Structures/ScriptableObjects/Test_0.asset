@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Test_0
   m_EditorClassIdentifier: 
   HPThreshold: 99
-  Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  Mesh: {fileID: 4300000, guid: e2178f313f097f04fb29b3f9d75d2f6a, type: 3}
