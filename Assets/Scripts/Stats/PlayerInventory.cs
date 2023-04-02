@@ -20,8 +20,10 @@ public class PlayerInventory : MonoBehaviour
     
     void Start()
     {
+
        tagToCheck = "FixerHat";
        NumberOfRubble = 5;
+
 
         playerHand = GameObject.FindGameObjectWithTag("HoldLocation");
 
