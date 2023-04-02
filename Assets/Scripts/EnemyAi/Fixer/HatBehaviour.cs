@@ -19,7 +19,8 @@ public class HatBehaviour : MonoBehaviour
    
     public float radius;
 
-    private bool hatCollect=false;
+    [HideInInspector]
+    public bool hatCollect=false; 
     private bool thrown=false;
     // Start is called before the first frame update
     void Start()
@@ -46,19 +47,16 @@ public class HatBehaviour : MonoBehaviour
         if(hatCollect==false) {CheckForPlayer();}
 
         // HatAnim();
-        Debug.Log(PlayerInventory.childExists);
-
+        // Debug.Log(PlayerInventory.childExists);
     }
 
+    // Hat picked by player from fixer's head
    public void Throw(){
+        hat_rigid.isKinematic = true;
         parentFixer.BecomeScared();
         this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player
         transform.position = playerHandLoc.transform.position;      // Change to HoldLocation parent
         hatCollect=true;
-        Debug.Log("Thrown");
-
-        // hat_rigid.isKinematic=false;
-
     }
 
     void Pickup(Collider other){
@@ -92,7 +90,7 @@ public class HatBehaviour : MonoBehaviour
             if (c.GetComponent<PlayerMovement>())
             {
                 
-                //adding picking up hat
+                // Pick hat from fixer's head 
                 if(Input.GetKey(KeyCode.F) && PlayerInventory.childExists == false)
                 {
                     Throw();

@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour
     
     void Start()
     {
-        NumberOfRubble = 5;
+        NumberOfRubble = 0;
 
         playerHand = GameObject.FindGameObjectWithTag("HoldLocation");
     }

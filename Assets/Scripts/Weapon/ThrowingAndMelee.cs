@@ -23,9 +23,9 @@ public class ThrowingAndMelee : MonoBehaviour
     public float throwUpwardForce;
 
     [Header("Melee")]
-    public KeyCode MeleeKey = KeyCode.Mouse0;
-    private Animator Animator;
-    private GameObject MeleeWeapon;
+    // public KeyCode MeleeKey = KeyCode.Mouse0;
+    // private Animator Animator;
+    // private GameObject MeleeWeapon;
     
 
     bool readyToThrow;
@@ -34,20 +34,20 @@ public class ThrowingAndMelee : MonoBehaviour
         {
             readyToThrow = true;
             PlayerInventory = GetComponent<PlayerInventory>();
-            Animator = GetComponent<Animator>();
-            MeleeWeapon = GameObject.FindGameObjectWithTag("MeleeWeapon");
+            // Animator = GetComponent<Animator>();
+            // MeleeWeapon = GameObject.FindGameObjectWithTag("MeleeWeapon");
         }
 
     private void Update()
     {
         // Throw when number of rubble is not zero
-        if((Input.GetKeyDown(throwKey) == true) && (readyToThrow == true) && (PlayerInventory.NumberOfRubble > 0))
+        if((Input.GetKeyDown(throwKey) == true) && (readyToThrow == true) && (PlayerInventory.childExists == true))
         {
             Throw();
         }
 
         // Melee when number of rubble is not zero
-        if(Input.GetKeyDown(MeleeKey) == true && (PlayerInventory.NumberOfRubble > 0))
+        /* if(Input.GetKeyDown(MeleeKey) == true && (PlayerInventory.NumberOfRubble > 0))
         {
             Animator.SetTrigger("isMelee");
         }
@@ -56,7 +56,7 @@ public class ThrowingAndMelee : MonoBehaviour
         if(PlayerInventory.NumberOfRubble < 1)
         {
             MeleeWeapon.SetActive(false);
-        }
+        } */
     }
 
     private void Throw()
@@ -77,7 +77,7 @@ public class ThrowingAndMelee : MonoBehaviour
         } 
         
         // Calculate direction
-         Vector3 forceDirection = Player.transform.forward;
+        Vector3 forceDirection = Player.transform.forward;
 
         RaycastHit hit;
 
@@ -91,16 +91,14 @@ public class ThrowingAndMelee : MonoBehaviour
 
         projectileRb.isKinematic = false;
         projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
-              
 
-        totalThrows--;
+        // totalThrows--;
         
-        // PlayerInventory.RubbleThrown();
+        PlayerInventory.RubbleThrown();
 
         // implement throwCooldown
-        Invoke(nameof(ResetThrow), throwCooldown);   
-        
-        
+        Invoke(nameof(ResetThrow), throwCooldown);
+        Debug.Log(PlayerInventory.NumberOfRubble); 
     }
 
     private void ResetThrow()
