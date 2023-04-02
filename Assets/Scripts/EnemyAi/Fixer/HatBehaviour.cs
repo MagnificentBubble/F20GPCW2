@@ -89,7 +89,6 @@ public class HatBehaviour : MonoBehaviour
         {
             if (c.GetComponent<PlayerMovement>())
             {
-                
                 // Pick hat from fixer's head 
                 if(Input.GetKey(KeyCode.F) && PlayerInventory.childExists == false)
                 {
