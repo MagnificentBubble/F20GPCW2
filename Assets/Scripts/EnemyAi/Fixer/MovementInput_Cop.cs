@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 
 
@@ -36,7 +37,6 @@ public class MovementInput_Cop : MonoBehaviour {
     private Vector3 moveVector;
 	private float[] animSpeeds={3.5f, 3.0f};
 
-	public GameObject TimerGO;
 
 	// Use this for initialization
 	void Start () {
@@ -81,7 +81,7 @@ public class MovementInput_Cop : MonoBehaviour {
 			if(target==playertarget){
 				target=null;
 				SetBehaviour(state.arrest);
-				//GameObject.FindGameObjectWithTag("JailPic").GetComponent<JailTime>().countDownStartValue = 10;
+				
 			}
 		}
 		if(target!=null){
@@ -92,18 +92,17 @@ public class MovementInput_Cop : MonoBehaviour {
 		}
 	}
 	void Arrest(){
+
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().FreezePlayer(transform);
 		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().LockCamera(transform);
 		
-		
-		// Debug.Log(GameObject.FindGameObjectWithTag("JailTimer").GetComponent<JailTime>());
-		TimerGO.GetComponent<JailTime>().countDownTimer();
 		
 		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
 			SetBehaviour(state.roam);
 			FindNewTarget();
 			
 		}
+		Invoke("Dead", 3f);
 	}
 	public void SetBehaviour(state newstate){
 		string stateString= newstate.ToString();
@@ -132,5 +131,9 @@ public class MovementInput_Cop : MonoBehaviour {
 	public void AlertCop(){
 		target=playertarget;
 		SetBehaviour(state.chase);
+	}
+	private void Dead()
+	{
+		SceneManager.LoadScene("DeathScreen");
 	}
 }

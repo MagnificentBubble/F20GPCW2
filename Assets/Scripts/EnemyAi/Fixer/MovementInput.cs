@@ -24,6 +24,7 @@ public class MovementInput : MonoBehaviour {
 	public string TargetLocations;
 	public int targetIndex;
 	public bool isGrounded;
+	public bool fix;
 
 	public enum state {roam,fix,findhat, scared, pickup};
 	public state behaviour;
@@ -35,7 +36,7 @@ public class MovementInput : MonoBehaviour {
 	public float speed;
 	[Range(0f, 1f)]
 	private float bufferDistance=0f;
-	private float[] buffers={1.0f, 3.0f, 0.1f};
+	private float[] buffers={1.0f, 7.0f, 0.1f};
 
     public float verticalVel;
     private Vector3 moveVector;
@@ -44,6 +45,7 @@ public class MovementInput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		fix=false;
 		agent=this.GetComponent<NavMeshAgent>();
 		anim = this.GetComponent<Animator> ();
 		targetIndex=Random.Range(0,6);
@@ -66,7 +68,7 @@ public class MovementInput : MonoBehaviour {
 				break;
 			case state.pickup:
 				if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
-					Debug.Log("AnimDone");
+
 					SetBehaviour(state.roam);
 					FindNewTarget();
 				}
@@ -83,7 +85,7 @@ public class MovementInput : MonoBehaviour {
 				target=null;
 				SetBehaviour(state.pickup);
 			}
-			else if (target.gameObject.tag=="Broken"){
+			else if (fix){
 				SetBehaviour(state.fix);
 			}
 			else {
@@ -117,16 +119,16 @@ public class MovementInput : MonoBehaviour {
 	}
 
 	public void FindNewTarget(){
-		Debug.Log("FindNewTarget");
 		targetIndex=Random.Range(0,6);
 		TargetLocations="TargetLocations ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if(other.GetComponent<Destruction>()!=null){
-			if (other.GetComponent<Destruction>().CurrentStage!=0 && behaviour==state.roam){
+	void OnTriggerStay(Collider other) {
+		if(other.gameObject.tag == "Destructable"){
+			if (other.gameObject.GetComponent<Destruction>().CurrentStage!=0 && behaviour==state.roam){
 				target=other.transform;
+				fix=true;
         	}
 		}
 		 
@@ -143,6 +145,12 @@ public class MovementInput : MonoBehaviour {
 	private void FixObject(){
 		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 2 >=0.1){
 			target.GetComponent<Health>().Heal(3.5f);
+		}
+		if(target.GetComponent<Health>().HP>=target.GetComponent<Health>().HPMax){
+			Debug.Log("Fixed");
+			fix=false;
+			SetBehaviour(state.roam);
+			FindNewTarget();
 		}
 
 	}
