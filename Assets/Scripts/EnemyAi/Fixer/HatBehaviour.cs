@@ -44,7 +44,7 @@ public class HatBehaviour : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
-        if(hatCollect==false) {CheckForPlayer();}
+        //if(hatCollect==false) {CheckForPlayer();}
 
         // HatAnim();
         // Debug.Log(PlayerInventory.childExists);
@@ -82,25 +82,20 @@ public class HatBehaviour : MonoBehaviour
         // }
     }
 
-    private void CheckForPlayer()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-        foreach(Collider c in colliders)
-        {
-            if (c.GetComponent<PlayerMovement>())
-            {
+    // private void CheckForPlayer()
+    // {
+    //     Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+    //     foreach(Collider c in colliders)
+    //     {
+    //         if (c.GetComponent<PlayerMovement>())
+    //         {
                 
-                //adding picking up hat
-                if(Input.GetKeyDown(KeyCode.F) && PlayerInventory.childExists == false && closestToPlayer == true)
+    //             //adding picking up hat
 
-                {
-                    Throw();
                 
-                } 
-                
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     public void SetClosestToPlayer()
     {

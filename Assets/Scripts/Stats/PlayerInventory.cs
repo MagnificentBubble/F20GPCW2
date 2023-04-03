@@ -22,7 +22,7 @@ public class PlayerInventory : MonoBehaviour
     {
 
        tagToCheck = "FixerHat";
-       NumberOfRubble = 5;
+       NumberOfRubble = 0;
 
 
         playerHand = GameObject.FindGameObjectWithTag("HoldLocation");

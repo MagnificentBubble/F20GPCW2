@@ -5,10 +5,11 @@ using UnityEngine;
 public class ObjectThrow : MonoBehaviour
 {
     public float radius = 4f;
-    private Rigidbody RubbleRb;
     private GameObject playerHandLoc;
     private Collider ObjectCollider;
     private PlayerInventory PlayerInventory;
+    private Rigidbody RubbleRb;
+
     [SerializeField] public float Damage;
 
     void Start()
@@ -34,20 +35,17 @@ public class ObjectThrow : MonoBehaviour
 
     void Update()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-        foreach(Collider c in colliders)
-        {
-            if (c.GetComponent<PlayerMovement>())
-            {
-                //adding picking up hat
-                if(Input.GetKeyDown(KeyCode.F) && (PlayerInventory.NumberOfRubble < 5) && (RubbleRb.isKinematic == false))
-                {
-                    RubbleRb.isKinematic = true;
-                    this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player
-                    transform.position = playerHandLoc.transform.position;      // Change to HoldLocation parent
-                    PlayerInventory.RubbleCollected();
-                } 
-            }
-        }
     }     
+
+    public void Pickup(){
+
+        if ((PlayerInventory.NumberOfRubble < 5) && (RubbleRb.isKinematic == false)){
+        Debug.Log("Rubble");
+        RubbleRb.isKinematic = true;
+        this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player
+        transform.position = playerHandLoc.transform.position;      // Change to HoldLocation parent
+        PlayerInventory.RubbleCollected();
+        }
+
+    }
 }
