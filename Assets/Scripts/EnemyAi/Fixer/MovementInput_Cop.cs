@@ -30,7 +30,7 @@ public class MovementInput_Cop : MonoBehaviour {
 	[Range(2f, 5f)]
 	public float speed;
 	[Range(0f, 1f)]
-	private float bufferDistance=1.0f;
+	private float bufferDistance=3.0f;
 
     public float verticalVel;
     private Vector3 moveVector;
@@ -60,7 +60,6 @@ public class MovementInput_Cop : MonoBehaviour {
 				Arrest();
 				break;
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha0)){AlertCop();}
     }
 
 	void Move(){
@@ -90,9 +89,13 @@ public class MovementInput_Cop : MonoBehaviour {
 		}
 	}
 	void Arrest(){
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().FreezePlayer(transform);
+		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().LockCamera(transform);
 		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
 			SetBehaviour(state.roam);
 			FindNewTarget();
+			//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().UnfreezePlayer();
+			//GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().UnlockCamera(transform);
 		}
 	}
 	public void SetBehaviour(state newstate){

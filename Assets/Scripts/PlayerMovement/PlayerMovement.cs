@@ -61,7 +61,9 @@ public class PlayerMovement : MonoBehaviour
         nearestObject=null;
 
         PromptText=GameObject.Find("Prompt");
-
+        moveSpeed=6;
+        RunSpeed=20;
+        jumpForce=7;
        
     }
 
@@ -231,6 +233,18 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public void FreezePlayer(Transform Cop){
+        transform.LookAt(Cop.position);//***************Change this to lock camera
+        moveSpeed=0;
+        RunSpeed=0;
+        jumpForce=0;
+    }
 
+
+    public void UnfreezePlayer(){
+        moveSpeed=6;
+        RunSpeed=20;
+        jumpForce=7;
+    }
 }
 
