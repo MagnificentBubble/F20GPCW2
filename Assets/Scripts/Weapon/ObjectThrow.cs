@@ -21,11 +21,11 @@ public class ObjectThrow : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // If it hits the player
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<Health>().Hurt(Damage);
-        }
+        // // If it hits the player
+        // if (collision.gameObject.tag == "Player")
+        // {
+        //     collision.gameObject.GetComponent<Health>().Hurt(Damage);
+        // }
         // If it hits the player
         if (collision.gameObject.tag == "Destructable")
         {
