@@ -196,19 +196,16 @@ public class PlayerMovement : MonoBehaviour
                 if(distancetoObject<nearestObjectdistance){
                     nearestObjectdistance=distancetoObject;
                     nearestObject=c.GetComponent<Transform>();
-                    Debug.Log(nearestObject);
                 }
             }
         }
 
         if (nearestObject!=null){
             if(nearestObject.CompareTag("FixerHat")){
-                Debug.Log("Hat");
                 if(Input.GetKeyDown(KeyCode.F) && PlayerInventory.childExists == false)
 
                     {
                         nearestObject.GetComponent<HatBehaviour>().Throw();
-                
                     } 
 
         }
