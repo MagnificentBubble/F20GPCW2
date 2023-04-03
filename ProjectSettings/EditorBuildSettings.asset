@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/UI/Scenes/Menu.unity
     guid: b23c9a6af4a6d4481ba1f2699ad7f4af
   - enabled: 1
-    path: Assets/Scenes/PlayerMovement.unity
-    guid: 45e7b7da67d46ef46ac052a456bb1718
+    path: Assets/Scenes/Level_1.unity
+    guid: 791754c8f68ef4846a88a64b7056c199
   - enabled: 1
     path: Assets/UI/Scenes/GameComplete.unity
     guid: 992e0ae4b348140a8ba9cf6b305bfc4b

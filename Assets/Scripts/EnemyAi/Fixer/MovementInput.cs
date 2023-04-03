@@ -117,6 +117,7 @@ public class MovementInput : MonoBehaviour {
 	}
 
 	public void FindNewTarget(){
+		Debug.Log("FindNewTarget");
 		targetIndex=Random.Range(0,6);
 		TargetLocations="TargetLocations ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;

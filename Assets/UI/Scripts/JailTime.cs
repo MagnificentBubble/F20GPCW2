@@ -14,15 +14,15 @@ public class JailTime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
-        GameObject.FindWithTag("JailPic").SetActive(false);
+        GameObject.FindWithTag("ABCD").SetActive(false);
+        GameObject.FindWithTag("ABCD").SetActive(false);
     }
 
     // Update is called once per frame 
     public void countDownTimer()
     {
         gameObject.SetActive(true);
-        GameObject.FindWithTag("JailPic").SetActive(true);
+        GameObject.FindWithTag("ABCD").SetActive(true);
         if (countDownStartValue > 0)
         {
 
@@ -36,7 +36,7 @@ public class JailTime : MonoBehaviour
         else 
         {
             gameObject.SetActive(false);
-            GameObject.FindWithTag("JailPic").SetActive(false);
+            GameObject.FindWithTag("ABCD").SetActive(false);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().UnfreezePlayer();
 			GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().UnlockCamera();
 
