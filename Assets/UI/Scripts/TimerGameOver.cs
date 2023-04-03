@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class TimerGameOver : MonoBehaviour
 {
-    int countDownStartValue = 70;
+    int countDownStartValue = 10;
     public Text timerUI;
     //public Text timerUI1;
     // Start is called before the first frame update

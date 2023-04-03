@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -773,7 +773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 346, y: -107}
+  m_AnchoredPosition: {x: 318, y: -154}
   m_SizeDelta: {x: 130.9, y: 34.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &357379898
@@ -1576,10 +1576,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "W ----------------------- Move Forward\nS  --------------------- Move
-    Backward\nSpaceBar ------------------------- Jump\nLeftShift -----------------------------
-    Run\nMouse -------------------------- Camera \nLeft Click(Mouse) --------------
-    Attack"
+  m_text: "W ---------------------------------------- Move Forward\nS  ---------------------------------------
+    Move Backward\nSpaceBar --------------------------- Jump\nLeftShift ---------------------------
+    Run\nMouse ------------------------------- Camera \nRight Click(Mouse) ------------
+    Attack\nF -------------------------------------- Pick Up"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1642,7 +1642,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -58.715942, y: -29.267899, z: -237.4092, w: -60.447655}
+  m_margin: {x: -58.715942, y: -29.267899, z: -367.86426, w: -60.447655}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

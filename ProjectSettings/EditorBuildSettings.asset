@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/UI/Scenes/Menu.unity
+    guid: b23c9a6af4a6d4481ba1f2699ad7f4af
+  - enabled: 1
     path: Assets/PlayerMovement.unity
     guid: 45e7b7da67d46ef46ac052a456bb1718
+  - enabled: 1
+    path: Assets/UI/Scenes/GameComplete.unity
+    guid: 992e0ae4b348140a8ba9cf6b305bfc4b
+  - enabled: 1
+    path: Assets/UI/Scenes/DeathScreen.unity
+    guid: 2e7d74ac651864c6bb7fb6000b95ed3c
   m_configObjects: {}
