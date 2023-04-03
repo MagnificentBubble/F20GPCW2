@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     
+    GameObject PromptText;
 
     private Animator anim;
     private bool isRunning;
@@ -58,6 +59,9 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         nearestObjectdistance=radius;
         nearestObject=null;
+
+        PromptText=GameObject.Find("Prompt");
+
        
     }
 
@@ -187,6 +191,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void CheckForObject()
     {
+        nearestObject=null;
         nearestObjectdistance = radius;
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach(Collider c in colliders)
@@ -196,30 +201,33 @@ public class PlayerMovement : MonoBehaviour
                 if(distancetoObject<nearestObjectdistance){
                     nearestObjectdistance=distancetoObject;
                     nearestObject=c.GetComponent<Transform>();
-                    // Debug.Log(nearestObject);
                 }
             }
         }
 
         if (nearestObject!=null){
             if(nearestObject.CompareTag("FixerHat")){
-                Debug.Log("Hat");
+                PromptText.GetComponent<Prompt>().BringPrompt("Hat");
                 if(Input.GetKeyDown(KeyCode.F) && PlayerInventory.childExists == false)
 
                     {
                         nearestObject.GetComponent<HatBehaviour>().Throw();
-                
                     } 
 
-        }
+            }
             else if(nearestObject.CompareTag("Rubble")){
+                PromptText.GetComponent<Prompt>().BringPrompt("Rubble");
                 if(Input.GetKeyDown(KeyCode.F))
                     {
                         nearestObject.GetComponent<ObjectThrow>().Pickup();
                     } 
 
+            }
         }
-        }        
+        else {
+                PromptText.GetComponent<Prompt>().ClosePrompt();
+        }
+
         
     }
 

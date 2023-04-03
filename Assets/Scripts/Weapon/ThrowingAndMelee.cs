@@ -96,7 +96,6 @@ public class ThrowingAndMelee : MonoBehaviour
 
         // implement throwCooldown
         Invoke(nameof(ResetThrow), throwCooldown);
-        Debug.Log(PlayerInventory.NumberOfRubble); 
     }
 
     private void ResetThrow()

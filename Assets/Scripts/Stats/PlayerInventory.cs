@@ -14,34 +14,41 @@ public class PlayerInventory : MonoBehaviour
     public string tagToCheck = "FixerHat";
 
     private GameObject[] gameObjectsWithTag;
-    
+
+   
 
     [HideInInspector]
-    public int NumberOfRubble;
-    
+    public static int NumberOfRubble;
+
+    private void Update()
+    {
+
+        HandCheck();
+
+    }
+
+
     void Start()
     {
 
        tagToCheck = "FixerHat";
        NumberOfRubble = 0;
 
-
         playerHand = GameObject.FindGameObjectWithTag("HoldLocation");
 
         gameObjectsWithTag = GameObject.FindGameObjectsWithTag(tagToCheck);
     }
 
-    private void Update() 
-    {
-        HandCheck();
-        ClosestEnemy();
-    }
+
 
     public void RubbleCollected()
     {
         if (NumberOfRubble <= MaxRubbleInventory)
         {
             NumberOfRubble++;
+            
+
+
         }
     }
 
@@ -50,45 +57,20 @@ public class PlayerInventory : MonoBehaviour
         if (NumberOfRubble > 0)
         {
             NumberOfRubble--;
+            
         }
     }
+
+
+
+
+
 
     public void HandCheck()
     {
         childExists = playerHand.transform.childCount > 0;
     }
 
-    public void ClosestEnemy()
-    {
-        // Check which game object is closest
-        GameObject closestGameObject = null;
-        float closestDistance = float.MaxValue;
-        foreach (GameObject gameObject in gameObjectsWithTag)
-        {
-            float distance = Vector3.Distance(transform.position, gameObject.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestGameObject = gameObject;
-                
-            }
-        }
-       
-        // Do something with the closest game object
-        if (closestGameObject != null)
-        {
-            
-            closestGameObject.GetComponent<HatBehaviour>().SetClosestToPlayer();
-            // Debug.Log(closestGameObject);
-            // closestGameObject.SetClosestToPlayer();
-            // HatBehaviour.SetClosestToPlayer();
-            // closestGameObject.SetBool("closestToPlayer",true);
-            // GameObject CGO = closestGameObject.GetComponent<HatBehaviour>();
-            // CGO.SetBool("closestToPlayer",true);
-            
-        }
-        
-    }
 
     
 }
