@@ -36,12 +36,14 @@ public class MovementInput_Cop : MonoBehaviour {
     private Vector3 moveVector;
 	private float[] animSpeeds={3.5f, 3.0f};
 
+	public GameObject TimerGO;
+
 	// Use this for initialization
 	void Start () {
 		agent=this.GetComponent<NavMeshAgent>();
 		anim = this.GetComponent<Animator> ();
 		targetIndex=Random.Range(0,6);
-		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
+		TargetLocations="TargetLocations ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
 		SetBehaviour(state.roam);
 		playertarget=GameObject.FindGameObjectWithTag("Player").transform;
@@ -92,7 +94,11 @@ public class MovementInput_Cop : MonoBehaviour {
 	void Arrest(){
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().FreezePlayer(transform);
 		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().LockCamera(transform);
-		//GameObject.FindGameObjectWithTag("JailTimer").GetComponent<JailTime>().countDownTimer();
+		
+		
+		// Debug.Log(GameObject.FindGameObjectWithTag("JailTimer").GetComponent<JailTime>());
+		TimerGO.GetComponent<JailTime>().countDownTimer();
+		
 		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
 			SetBehaviour(state.roam);
 			FindNewTarget();
@@ -113,7 +119,7 @@ public class MovementInput_Cop : MonoBehaviour {
 
 	public void FindNewTarget(){
 		targetIndex=Random.Range(0,6);
-		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
+		TargetLocations="TargetLocations ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
 	}
 
