@@ -37,7 +37,8 @@ public class ObjectThrow : MonoBehaviour
     {
     }     
 
-    public void Pickup(){
+    public void Pickup()
+    {
 
         if ((PlayerInventory.NumberOfRubble < 5) && (RubbleRb.isKinematic == false)){
         RubbleCol.enabled = !RubbleCol.enabled;
