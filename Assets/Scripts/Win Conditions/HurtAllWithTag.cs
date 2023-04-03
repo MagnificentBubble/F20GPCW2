@@ -11,9 +11,9 @@ public class HurtAllWithTag : WinState
     void Update()
     {    
         bool check = true;
-        foreach (obj in GameObject.FindGameObjectsWithTag(Tag))
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(Tag))
         {           
-            check = check && (obj.getComponent<Health>.HP < HPThreshold);
+            check = check && (obj.GetComponent<Health>().HP < HPThreshold);
             
             Won = check;
         }
