@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach(Collider c in colliders)
         {
-            if(c.CompareTag("FixerHat")||c.CompareTag("Rubble")){
+            if(c.CompareTag("FixerHat")||c.CompareTag("Rubble")||c.CompareTag("MeleeWeapon")){
                 distancetoObject=(transform.position-c.transform.position).sqrMagnitude;
                 if(distancetoObject<nearestObjectdistance){
                     nearestObjectdistance=distancetoObject;
@@ -222,6 +222,14 @@ public class PlayerMovement : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.F))
                     {
                         nearestObject.GetComponent<ObjectThrow>().Pickup();
+                    } 
+
+            }
+            else if(nearestObject.CompareTag("MeleeWeapon")){
+                PromptText.GetComponent<Prompt>().BringPrompt("Weapon");
+                if(Input.GetKeyDown(KeyCode.F))
+                    {
+                        nearestObject.GetComponent<MeleeWeapon>().Pickup();
                     } 
 
             }
