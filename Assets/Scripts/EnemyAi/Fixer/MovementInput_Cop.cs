@@ -79,6 +79,7 @@ public class MovementInput_Cop : MonoBehaviour {
 			if(target==playertarget){
 				target=null;
 				SetBehaviour(state.arrest);
+				//GameObject.FindGameObjectWithTag("JailPic").GetComponent<JailTime>().countDownStartValue = 10;
 			}
 		}
 		if(target!=null){
@@ -91,11 +92,11 @@ public class MovementInput_Cop : MonoBehaviour {
 	void Arrest(){
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().FreezePlayer(transform);
 		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().LockCamera(transform);
+		//GameObject.FindGameObjectWithTag("JailTimer").GetComponent<JailTime>().countDownTimer();
 		if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >=0.8){
 			SetBehaviour(state.roam);
 			FindNewTarget();
-			//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().UnfreezePlayer();
-			//GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().UnlockCamera(transform);
+			
 		}
 	}
 	public void SetBehaviour(state newstate){
