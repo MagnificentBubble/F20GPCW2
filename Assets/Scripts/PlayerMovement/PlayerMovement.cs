@@ -24,6 +24,12 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool grounded;
 
+    public float radius;
+
+    private float distancetoObject;
+    private float nearestObjectdistance;
+
+    private Transform nearestObject;
 
     public Transform orientation;
 
@@ -33,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    
 
     private Animator anim;
     private bool isRunning;
@@ -42,17 +49,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() 
     {
+        radius=4;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
         readyToJump = true;
 
         anim = GetComponentInChildren<Animator>();
+        nearestObjectdistance=radius;
+        nearestObject=null;
+       
     }
 
     private void Update() 
     {
-
+        CheckForObject();
         PlayerRotation();
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight *0.5f +0.2f, whatIsGround);
@@ -159,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void PlayerRotation()
+    
     {
         // Get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime *400;   
@@ -173,5 +185,44 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
+    private void CheckForObject()
+    {
+        nearestObjectdistance = radius;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        foreach(Collider c in colliders)
+        {
+            if(c.CompareTag("FixerHat")||c.CompareTag("Rubble")){
+                distancetoObject=(transform.position-c.transform.position).sqrMagnitude;
+                if(distancetoObject<nearestObjectdistance){
+                    nearestObjectdistance=distancetoObject;
+                    nearestObject=c.GetComponent<Transform>();
+                    Debug.Log(nearestObject);
+                }
+            }
+        }
+
+        if (nearestObject!=null){
+            if(nearestObject.CompareTag("FixerHat")){
+                Debug.Log("Hat");
+                if(Input.GetKeyDown(KeyCode.F) && PlayerInventory.childExists == false)
+
+                    {
+                        nearestObject.GetComponent<HatBehaviour>().Throw();
+                
+                    } 
+
+        }
+            else if(nearestObject.CompareTag("Rubble")){
+                if(Input.GetKeyDown(KeyCode.F))
+                    {
+                        nearestObject.GetComponent<ObjectThrow>().Pickup();
+                    } 
+
+        }
+        }        
+        
+    }
+
+
 }
 

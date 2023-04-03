@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4536889609963809716}
   m_Layer: 0
   m_Name: BrickThrow
-  m_TagString: Untagged
+  m_TagString: Rubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadf146862c455e4ca0fd8835f9c04b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectRigidBody: {fileID: 4138324957150290129}
+  radius: 4
   Damage: 20
 --- !u!65 &4536889609963809716
 BoxCollider:
