@@ -24,9 +24,9 @@ public class ThrowingAndMelee : MonoBehaviour
     public float throwUpwardForce;
 
     [Header("Melee")]
-    // public KeyCode MeleeKey = KeyCode.Mouse0;
-    // private Animator Animator;
-    // private GameObject MeleeWeapon;
+    public KeyCode MeleeKey = KeyCode.Mouse0;
+    private Animator MeleeAnimator;
+    private MeleeWeapon MeleeWeapon;
     
 
     bool readyToThrow;
@@ -35,8 +35,8 @@ public class ThrowingAndMelee : MonoBehaviour
         {
             readyToThrow = true;
             PlayerInventory = GetComponent<PlayerInventory>();
-            // Animator = GetComponent<Animator>();
-            // MeleeWeapon = GameObject.FindGameObjectWithTag("MeleeWeapon");
+            MeleeAnimator = GameObject.FindGameObjectWithTag("MeleeLocation").GetComponentInParent<Animator>();
+            MeleeWeapon = GameObject.FindGameObjectWithTag("MeleeWeapon").GetComponent<MeleeWeapon>();
         }
 
     private void Update()
@@ -48,16 +48,11 @@ public class ThrowingAndMelee : MonoBehaviour
         }
 
         // Melee when number of rubble is not zero
-        /* if(Input.GetKeyDown(MeleeKey) == true && (PlayerInventory.NumberOfRubble > 0))
+        if(Input.GetKeyDown(MeleeKey))
         {
-            Animator.SetTrigger("isMelee");
+            MeleeWeapon.InflictMeleeDamage = true;
+            MeleeAnimator.SetTrigger("isMelee");
         }
-
-        // Remove rubble on hand when number of rubble is zero
-        if(PlayerInventory.NumberOfRubble < 1)
-        {
-            MeleeWeapon.SetActive(false);
-        } */
     }
 
     private void Throw()
