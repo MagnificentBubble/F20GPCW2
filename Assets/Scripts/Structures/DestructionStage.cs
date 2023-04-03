@@ -6,5 +6,5 @@ using UnityEngine;
 public class DestructionStage : ScriptableObject
 {
     [SerializeField] public float HPThreshold;
-    [SerializeField] public Mesh Mesh;
+    [SerializeField] public GameObject Prefab;
 }
