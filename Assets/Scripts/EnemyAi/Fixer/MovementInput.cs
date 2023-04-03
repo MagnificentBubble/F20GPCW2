@@ -47,7 +47,7 @@ public class MovementInput : MonoBehaviour {
 		agent=this.GetComponent<NavMeshAgent>();
 		anim = this.GetComponent<Animator> ();
 		targetIndex=Random.Range(0,6);
-		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
+		TargetLocations="TargetLocations ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
 		SetBehaviour(state.roam);
 		anim.SetFloat("Speed",3.5f);
@@ -117,8 +117,9 @@ public class MovementInput : MonoBehaviour {
 	}
 
 	public void FindNewTarget(){
+		Debug.Log("FindNewTarget");
 		targetIndex=Random.Range(0,6);
-		TargetLocations="TargetLocation ("+ targetIndex.ToString() +")";
+		TargetLocations="TargetLocations ("+ targetIndex.ToString() +")";
 		target=GameObject.Find(TargetLocations).transform;
 	}
 
