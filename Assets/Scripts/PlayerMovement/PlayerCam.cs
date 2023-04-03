@@ -20,6 +20,8 @@ public class PlayerCam : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;    
+        senseX=400;
+        senseY=400;
     }
 
     private void Update() 
@@ -57,5 +59,17 @@ public class PlayerCam : MonoBehaviour
         //      orientation.forward = dirToCombatLookAt.normalized;
 
         //      PlayerObj.forward = dirToCombatLookAt.normalized;
+    }
+
+    public void LockCamera(Transform Cop){
+        transform.LookAt(Cop.position);//***************Change this to lock camera
+        senseX=0;
+        senseY=0;
+    }
+
+
+    public void UnlockCamera(){
+        senseX=400;
+        senseY=400;
     }
 }

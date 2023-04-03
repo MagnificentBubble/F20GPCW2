@@ -1914,7 +1914,6 @@ GameObject:
   - component: {fileID: 539745478100655087}
   - component: {fileID: 7635726066119915157}
   - component: {fileID: 4757836856755875625}
-  - component: {fileID: 4757836856755875626}
   - component: {fileID: 588541306397113051}
   - component: {fileID: 3293967567291665282}
   - component: {fileID: 7803081793228066733}
@@ -1976,7 +1975,7 @@ Animator:
   m_GameObject: {fileID: 3541754002163558908}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
-  m_Controller: {fileID: 9100000, guid: 535d24752e3d6444da644e79e90ec2ca, type: 2}
+  m_Controller: {fileID: 9100000, guid: 802c7bb8b5198f64fa17a0e202cf809c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2009,31 +2008,6 @@ MonoBehaviour:
   - {r: 0.72790754, g: 2, b: 0.26178014, a: 1}
   - {r: 2, g: 0.87978274, b: 0.26178014, a: 1}
   eyeState: 0
---- !u!114 &4757836856755875626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3541754002163558908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa9f165e2b4f1a4f9522501717c095d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destination: {x: 0, y: 0, z: 0}
-  desiredRotationSpeed: 0.3
-  anim: {fileID: 0}
-  agent: {fileID: 0}
-  target: {fileID: 0}
-  hattarget: {fileID: 0}
-  TargetLocations: 
-  targetIndex: 0
-  isGrounded: 0
-  behaviour: 0
-  StartAnimTime: 0
-  speed: 0
-  verticalVel: -0.5
 --- !u!195 &588541306397113051
 NavMeshAgent:
   m_ObjectHideFlags: 0
