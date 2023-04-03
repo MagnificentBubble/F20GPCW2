@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6110227616090329554}
   - component: {fileID: 6354407293824146415}
   - component: {fileID: 7050354002504293473}
-  - component: {fileID: 4005267051141774325}
   - component: {fileID: 4005267051141774324}
   - component: {fileID: 4005267051141772299}
+  - component: {fileID: -1019335956047052968}
   m_Layer: 0
   m_Name: TestStructure
   m_TagString: Destructable
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7993574455645430744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.04, y: 1.95, z: 0.29}
-  m_LocalScale: {x: 2, y: 4, z: 2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7993574455645430744}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -8663599589376259019, guid: 74ee95a897932a946bca4a79b74f6750, type: 3}
 --- !u!23 &6354407293824146415
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f242548e4848c614ca1825e176f890d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,18 +100,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4005267051141774325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7993574455645430744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e517ddaa3019206489ac8d5e09ab9107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4005267051141774324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,8 +129,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestructionStages:
   - {fileID: 11400000, guid: 39af0e346c50cf1469911dcac9e0120d, type: 2}
+  - {fileID: 11400000, guid: 0cbb60cc59957ee4aa569cb20f123673, type: 2}
   - {fileID: 11400000, guid: 3d25bf8d59476f249953e0bb3ad07df7, type: 2}
   - {fileID: 11400000, guid: f18346f059d14094da2316134a5dc7a9, type: 2}
-  - {fileID: 11400000, guid: 24b22a4f0c0135d4db34d0cf60621137, type: 2}
-  - {fileID: 11400000, guid: cb9a07e220aa0934e9ab89ef8e9c0672, type: 2}
+  - {fileID: 11400000, guid: e8bb9eb480c9a8a4e9cb250718f1b8d9, type: 2}
   CurrentStage: 0
+--- !u!114 &-1019335956047052968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993574455645430744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e517ddaa3019206489ac8d5e09ab9107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
