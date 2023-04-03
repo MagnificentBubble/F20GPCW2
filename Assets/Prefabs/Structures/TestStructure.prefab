@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6140601224565044198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7714323116359587259}
+  - component: {fileID: 8013341285934835694}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7714323116359587259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140601224565044198}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 5.31, y: -0.81, z: 30.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3264140331661189571}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8013341285934835694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140601224565044198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adb44d0cdd69dc4b82de889f7205885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Likelihood: 100
 --- !u!1 &7993574455645430744
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +59,7 @@ GameObject:
   - component: {fileID: 7050354002504293473}
   - component: {fileID: 4005267051141774324}
   - component: {fileID: 4005267051141772299}
+  - component: {fileID: -6210995347026370286}
   - component: {fileID: -1019335956047052968}
   m_Layer: 0
   m_Name: TestStructure
@@ -33,7 +79,8 @@ Transform:
   m_LocalPosition: {x: -1.04, y: 1.95, z: 0.29}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7714323116359587259}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -134,6 +181,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f18346f059d14094da2316134a5dc7a9, type: 2}
   - {fileID: 11400000, guid: e8bb9eb480c9a8a4e9cb250718f1b8d9, type: 2}
   CurrentStage: 0
+--- !u!114 &-6210995347026370286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993574455645430744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f290355728cc9f64586d3aed2fb65e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rubble_Type: {fileID: 6352514828618611832, guid: 8311914bb9ca98940933d91769234d14, type: 3}
+  SpawnPoints:
+  - {fileID: 6140601224565044198}
 --- !u!114 &-1019335956047052968
 MonoBehaviour:
   m_ObjectHideFlags: 0
