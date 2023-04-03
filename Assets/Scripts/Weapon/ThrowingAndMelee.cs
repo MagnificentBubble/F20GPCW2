@@ -13,6 +13,7 @@ public class ThrowingAndMelee : MonoBehaviour
     public Transform AttackPoint;
     private GameObject ObjectToThrow;
 
+
     [Header("Settings")]
     public int totalThrows;
     public float throwCooldown;
@@ -64,6 +65,7 @@ public class ThrowingAndMelee : MonoBehaviour
         readyToThrow = false;
         
         // Refererences
+        Collider ObjectCollider = GameObject.FindGameObjectWithTag("HoldLocation").GetComponentInChildren<Collider>();
         Rigidbody projectileRb = GameObject.FindGameObjectWithTag("HoldLocation").GetComponentInChildren<Rigidbody>();
         Transform ObjectToThrows = GameObject.FindGameObjectWithTag("HoldLocation").GetComponentInChildren<Transform>();
         
@@ -89,6 +91,7 @@ public class ThrowingAndMelee : MonoBehaviour
         // Add force to projectile
         Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
 
+        ObjectCollider.enabled = !ObjectCollider.enabled;
         projectileRb.isKinematic = false;
         projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
 

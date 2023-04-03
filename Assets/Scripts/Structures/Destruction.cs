@@ -59,8 +59,12 @@ public class Destruction : MonoBehaviour
         this.gameObject.GetComponent<MeshRenderer>().material = DestructionStages[stage].Prefab.GetComponent<MeshRenderer>().sharedMaterial;
         this.gameObject.GetComponent<Transform>().localRotation = DestructionStages[stage].Prefab.GetComponent<Transform>().localRotation;
         this.gameObject.GetComponent<Transform>().localScale = DestructionStages[stage].Prefab.GetComponent<Transform>().localScale;
-    }
+        this.gameObject.GetComponent<BoxCollider>().size = DestructionStages[stage].Prefab.GetComponent<BoxCollider>().size;
+        this.gameObject.GetComponent<BoxCollider>().center=DestructionStages[stage].Prefab.GetComponent<BoxCollider>().center;
+        //this.gameObject.GetComponent<BoxCollider>().transform.localPosition=DestructionStages[stage].Prefab.GetComponent<BoxCollider>().transform.localPosition;
+        this.gameObject.GetComponent<BoxCollider>().transform.localRotation=DestructionStages[stage].Prefab.GetComponent<BoxCollider>().transform.localRotation;
 
+    }
     private void destroyStage() {
         CurrentStage += 1;
         swapMesh(CurrentStage);

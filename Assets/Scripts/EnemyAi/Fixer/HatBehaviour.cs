@@ -43,6 +43,7 @@ public class HatBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(hat_rigid.velocity.sqrMagnitude<=0.1);
         //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
         //if(hatCollect==false) {CheckForPlayer();}
 
@@ -71,7 +72,7 @@ public class HatBehaviour : MonoBehaviour
         if (other.gameObject.tag=="Fixer" && thrown){
             Pickup(other);
         }
-        if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&&parentFixer.behaviour==MovementInput.state.scared){
+        if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&& parentFixer.behaviour==MovementInput.state.scared){
             thrown=true;
             hatCollect=false;
             parentFixer.target=this.transform;

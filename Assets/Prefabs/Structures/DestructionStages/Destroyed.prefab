@@ -12,8 +12,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2607229986018664187, guid: 22f34958fcdb3b2418c7a320e9516fd3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2607229986018664187, guid: 22f34958fcdb3b2418c7a320e9516fd3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2607229986018664187, guid: 22f34958fcdb3b2418c7a320e9516fd3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.05
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 2607229986018664187, guid: 22f34958fcdb3b2418c7a320e9516fd3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57,7 +65,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4705554056663240862, guid: 22f34958fcdb3b2418c7a320e9516fd3, type: 3}
       propertyPath: m_Name
-      value: Very Damaged Variant
+      value: Destroyed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22f34958fcdb3b2418c7a320e9516fd3, type: 3}
+--- !u!1 &883138263748460611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4705554056663240862, guid: 22f34958fcdb3b2418c7a320e9516fd3, type: 3}
+  m_PrefabInstance: {fileID: 5552082824410419421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &-7548751683011105248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883138263748460611}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 31.917574, y: 42.304596, z: 100.666115}
+  m_Center: {x: -0.0000047683716, y: -0.0000047683725, z: 50.214443}

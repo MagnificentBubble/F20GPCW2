@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class ObjectThrow : MonoBehaviour
 {
-    public float radius = 4f;
     private GameObject playerHandLoc;
-    private Collider ObjectCollider;
+    private Collider RubbleCol;
     private PlayerInventory PlayerInventory;
     private Rigidbody RubbleRb;
 
@@ -16,6 +15,7 @@ public class ObjectThrow : MonoBehaviour
     {
         playerHandLoc = GameObject.FindGameObjectWithTag("HoldLocation");
         RubbleRb = GetComponent<Rigidbody>();
+        RubbleCol = GetComponent<Collider>();
         PlayerInventory = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerInventory>();
     }
 
@@ -41,6 +41,7 @@ public class ObjectThrow : MonoBehaviour
 
         if ((PlayerInventory.NumberOfRubble < 5) && (RubbleRb.isKinematic == false)){
         Debug.Log("Rubble");
+        RubbleCol.enabled = !RubbleCol.enabled;
         RubbleRb.isKinematic = true;
         this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player
         transform.position = playerHandLoc.transform.position;      // Change to HoldLocation parent
