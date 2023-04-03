@@ -14,6 +14,8 @@ TagManager:
   - FixerSpawnPoint
   - CopSpawnPoint
   - FixerHat
+  - Rubble
+  - JailPic
   layers:
   - Default
   - TransparentFX

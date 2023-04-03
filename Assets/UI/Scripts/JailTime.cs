@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TimerGameOver : MonoBehaviour
+public class JailTime : MonoBehaviour
+
 {
-    int countDownStartValue = 80;
-    public Text timerUI;
+    int countDownStartValue = 10;
+    public Text jailTimeUI;
     
     // Start is called before the first frame update
     void Start()
@@ -16,30 +17,25 @@ public class TimerGameOver : MonoBehaviour
         countDownTimer();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame 
     void countDownTimer()
     {
         if (countDownStartValue > 0)
         {
 
             TimeSpan spanTime = TimeSpan.FromSeconds(countDownStartValue);
-            timerUI.text = "Timer : " + spanTime.Minutes + ":" + spanTime.Seconds;
-            Debug.Log("Timer : " + countDownStartValue);
+            jailTimeUI.text = "Jail Time : " + spanTime.Minutes + ":" + spanTime.Seconds;
+            Debug.Log("Jail Time : " + countDownStartValue);
             countDownStartValue--;
             Invoke("countDownTimer", 1.0f);
         }
 
         else
         {
-            SceneManager.LoadScene("DeathScreen");
+            Destroy(gameObject);
+            Destroy(GameObject.FindWithTag("JailPic"));
 
         }
     }
-    /*
-    void Health
-        {
-            if (Health = HPMax)
-            SceneManager.LoadScene("GameComplete");
-        }
-    */
+   
 }
