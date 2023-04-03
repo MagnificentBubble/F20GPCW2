@@ -24,7 +24,6 @@ public class PlayerInventory : MonoBehaviour
     {
 
         HandCheck();
-        ClosestEnemy();
 
     }
 
@@ -41,10 +40,6 @@ public class PlayerInventory : MonoBehaviour
     }
 
 
-    private void Update() 
-    {
-        HandCheck();
-    }
 
     public void RubbleCollected()
     {
