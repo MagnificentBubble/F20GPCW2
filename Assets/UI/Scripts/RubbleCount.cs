@@ -20,5 +20,6 @@ public class RubbleCount : MonoBehaviour
     {
         NoRubble = PlayerInventory.NumberOfRubble;
         rubblesNo.text = "Rubble:" + NoRubble.ToString();
+
     }
 }

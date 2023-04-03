@@ -16,6 +16,7 @@ TagManager:
   - FixerHat
   - Rubble
   - MeleeLocation
+  - JailPic
   layers:
   - Default
   - TransparentFX
