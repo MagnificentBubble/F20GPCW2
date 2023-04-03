@@ -25,7 +25,6 @@ public class PlayerInventory : MonoBehaviour
        tagToCheck = "FixerHat";
        NumberOfRubble = 0;
 
-
         playerHand = GameObject.FindGameObjectWithTag("HoldLocation");
 
         gameObjectsWithTag = GameObject.FindGameObjectsWithTag(tagToCheck);

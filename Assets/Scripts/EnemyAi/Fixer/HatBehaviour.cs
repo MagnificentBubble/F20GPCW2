@@ -47,6 +47,7 @@ public class HatBehaviour : MonoBehaviour
 
     // Hat picked by player from fixer's head
    public void Throw(){
+        HatCollider.enabled=!HatCollider.enabled;
         hat_rigid.isKinematic = true;
         parentFixer.BecomeScared();
         this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player
