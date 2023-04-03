@@ -40,7 +40,6 @@ public class ObjectThrow : MonoBehaviour
     public void Pickup(){
 
         if ((PlayerInventory.NumberOfRubble < 5) && (RubbleRb.isKinematic == false)){
-        Debug.Log("Rubble");
         RubbleCol.enabled = !RubbleCol.enabled;
         RubbleRb.isKinematic = true;
         this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player

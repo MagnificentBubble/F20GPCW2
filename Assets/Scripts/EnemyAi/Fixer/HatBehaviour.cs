@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class HatBehaviour : MonoBehaviour
 {
-    public bool closestToPlayer;
+
     // Animator anim;
     public Rigidbody hat_rigid;
+
+    private Collider HatCollider; 
 
     private MovementInput parentFixer;
     private Transform parent;
@@ -17,7 +19,6 @@ public class HatBehaviour : MonoBehaviour
 
     private GameObject playerHandLoc;
    
-    public float radius;
 
     [HideInInspector]
     public bool hatCollect=false; 
@@ -25,7 +26,6 @@ public class HatBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        radius = 50;
         hat_rigid=this.GetComponent<Rigidbody>();
         hat_rigid.isKinematic=true;   
         parent=transform.parent;
@@ -33,7 +33,7 @@ public class HatBehaviour : MonoBehaviour
         parentFixer.hattarget=transform;
         originPos=transform.localPosition;
         originRot=transform.localRotation;
-
+        HatCollider=GetComponent<Collider>();
         // anim = GetComponent<Animator>();
 
         playerHandLoc = GameObject.FindGameObjectWithTag("HoldLocation");
@@ -43,16 +43,11 @@ public class HatBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(hat_rigid.velocity.sqrMagnitude<=0.1);
-        //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
-        //if(hatCollect==false) {CheckForPlayer();}
-
-        // HatAnim();
-        // Debug.Log(PlayerInventory.childExists);
     }
 
     // Hat picked by player from fixer's head
    public void Throw(){
+        HatCollider.enabled=!HatCollider.enabled;
         hat_rigid.isKinematic = true;
         parentFixer.BecomeScared();
         this.gameObject.transform.parent=playerHandLoc.transform;   // Change to hand of Player
@@ -73,6 +68,7 @@ public class HatBehaviour : MonoBehaviour
             Pickup(other);
         }
         if (other.gameObject.layer==LayerMask.NameToLayer("whatIsGround")&& parentFixer.behaviour==MovementInput.state.scared){
+            Debug.Log("Here");
             thrown=true;
             hatCollect=false;
             parentFixer.target=this.transform;
@@ -97,17 +93,6 @@ public class HatBehaviour : MonoBehaviour
     //         }
     //     }
     // }
-
-    public void SetClosestToPlayer()
-    {
-        closestToPlayer = true;
-        Invoke(nameof(_SetClosestToPlayer),1f);
-    }
-
-    public void _SetClosestToPlayer()
-    {
-        closestToPlayer = false;
-    }
 
     // private void HatAnim()
     // {
