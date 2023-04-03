@@ -14,11 +14,21 @@ public class PlayerInventory : MonoBehaviour
     public string tagToCheck = "FixerHat";
 
     private GameObject[] gameObjectsWithTag;
-    
+
+   
 
     [HideInInspector]
-    public int NumberOfRubble;
-    
+    public static int NumberOfRubble;
+
+    private void Update()
+    {
+
+        HandCheck();
+        ClosestEnemy();
+
+    }
+
+
     void Start()
     {
 
@@ -31,17 +41,15 @@ public class PlayerInventory : MonoBehaviour
         gameObjectsWithTag = GameObject.FindGameObjectsWithTag(tagToCheck);
     }
 
-    private void Update() 
-    {
-        HandCheck();
-        ClosestEnemy();
-    }
 
     public void RubbleCollected()
     {
         if (NumberOfRubble <= MaxRubbleInventory)
         {
             NumberOfRubble++;
+            
+
+
         }
     }
 
@@ -50,8 +58,14 @@ public class PlayerInventory : MonoBehaviour
         if (NumberOfRubble > 0)
         {
             NumberOfRubble--;
+            
         }
     }
+
+
+
+
+
 
     public void HandCheck()
     {

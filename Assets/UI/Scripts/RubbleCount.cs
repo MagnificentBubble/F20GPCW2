@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RubbleCount : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    
+    public int NoRubble;
+    [SerializeField] private Text rubblesNo;
+
+    private void Start()
     {
-        
+        NoRubble = PlayerInventory.NumberOfRubble;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        NoRubble = PlayerInventory.NumberOfRubble;
+        rubblesNo.text = "Rubble:" + NoRubble.ToString();
+        Debug.Log(NoRubble);
     }
 }
