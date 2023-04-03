@@ -92,7 +92,7 @@ public class MovementInput_Cop : MonoBehaviour {
 		}
 	}
 	void Arrest(){
-		
+
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().FreezePlayer(transform);
 		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().LockCamera(transform);
 		
@@ -102,7 +102,6 @@ public class MovementInput_Cop : MonoBehaviour {
 			FindNewTarget();
 			
 		}
-		// SceneManager.LoadScene("DeathScreen");
 		Invoke("Dead", 3f);
 	}
 	public void SetBehaviour(state newstate){

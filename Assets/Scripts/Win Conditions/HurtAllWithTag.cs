@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HurtAllWithTag : WinState
 {
@@ -16,6 +17,11 @@ public class HurtAllWithTag : WinState
             check = check && (obj.GetComponent<Health>().HP < HPThreshold);
             
             Won = check;
+        }
+
+        if (Won)
+        {
+            SceneManager.LoadScene("GameComplete");
         }
     }
 }
