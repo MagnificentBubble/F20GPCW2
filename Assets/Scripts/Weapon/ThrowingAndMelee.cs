@@ -48,11 +48,11 @@ public class ThrowingAndMelee : MonoBehaviour
         }
 
         // Melee when number of rubble is not zero
-        if(Input.GetKeyDown(MeleeKey))
-        {
-            MeleeWeapon.InflictMeleeDamage = true;
-            MeleeAnimator.SetTrigger("isMelee");
-        }
+        // if(Input.GetKeyDown(MeleeKey))
+        // {
+        //     MeleeWeapon.InflictMeleeDamage = true;
+        //     MeleeAnimator.SetTrigger("isMelee");
+        // }
     }
 
     private void Throw()
