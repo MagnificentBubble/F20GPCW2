@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HatBehaviour : MonoBehaviour
 {
-    
+    public bool closestToPlayer;
     // Animator anim;
     public Rigidbody hat_rigid;
 
@@ -25,7 +25,7 @@ public class HatBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        radius = 4;
+        radius = 50;
         hat_rigid=this.GetComponent<Rigidbody>();
         hat_rigid.isKinematic=true;   
         parent=transform.parent;
@@ -89,14 +89,28 @@ public class HatBehaviour : MonoBehaviour
         {
             if (c.GetComponent<PlayerMovement>())
             {
-                // Pick hat from fixer's head 
-                if(Input.GetKey(KeyCode.F) && PlayerInventory.childExists == false)
+                
+                //adding picking up hat
+                if(Input.GetKeyDown(KeyCode.F) && PlayerInventory.childExists == false && closestToPlayer == true)
+
                 {
                     Throw();
+                
                 } 
                 
             }
         }
+    }
+
+    public void SetClosestToPlayer()
+    {
+        closestToPlayer = true;
+        Invoke(nameof(_SetClosestToPlayer),1f);
+    }
+
+    public void _SetClosestToPlayer()
+    {
+        closestToPlayer = false;
     }
 
     // private void HatAnim()
