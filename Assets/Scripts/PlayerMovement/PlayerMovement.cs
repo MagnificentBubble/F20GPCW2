@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
                 if(distancetoObject<nearestObjectdistance){
                     nearestObjectdistance=distancetoObject;
                     nearestObject=c.GetComponent<Transform>();
-                    Debug.Log(nearestObject);
+                    // Debug.Log(nearestObject);
                 }
             }
         }

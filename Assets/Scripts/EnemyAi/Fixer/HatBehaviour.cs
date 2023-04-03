@@ -43,7 +43,7 @@ public class HatBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(hat_rigid.velocity.sqrMagnitude<=0.1);
+        // Debug.Log(hat_rigid.velocity.sqrMagnitude<=0.1);
         //if (Input.GetKeyDown(KeyCode.Space)){Throw();}
         //if(hatCollect==false) {CheckForPlayer();}
 
