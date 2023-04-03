@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 4005267051141774324}
   - component: {fileID: 4005267051141772299}
   - component: {fileID: 2644480014969689355}
+  - component: {fileID: 8241956465426457216}
   m_Layer: 0
   m_Name: Pink
   m_TagString: Destructable
@@ -272,6 +273,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 18, y: 52, z: 18}
   m_Center: {x: 0, y: 26, z: 0}
+--- !u!114 &8241956465426457216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993574455645430744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f290355728cc9f64586d3aed2fb65e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rubble_Type: {fileID: 6352514828618611832, guid: 8311914bb9ca98940933d91769234d14, type: 3}
+  SpawnPoints:
+  - {fileID: 9219214035016054326}
+  - {fileID: 5494381770746188448}
+  - {fileID: 7250606866464524710}
+  - {fileID: 831859513332424244}
 --- !u!1 &9219214035016054326
 GameObject:
   m_ObjectHideFlags: 0
