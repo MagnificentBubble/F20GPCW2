@@ -8,18 +8,21 @@ using UnityEngine.UI;
 public class JailTime : MonoBehaviour
 
 {
-    int countDownStartValue = 10;
+    public int countDownStartValue = 10;
     public Text jailTimeUI;
     
     // Start is called before the first frame update
     void Start()
     {
-        countDownTimer();
+        gameObject.SetActive(false);
+        GameObject.FindWithTag("JailPic").SetActive(false);
     }
 
     // Update is called once per frame 
-    void countDownTimer()
+    public void countDownTimer()
     {
+        gameObject.SetActive(true);
+        GameObject.FindWithTag("JailPic").SetActive(true);
         if (countDownStartValue > 0)
         {
 
@@ -30,10 +33,12 @@ public class JailTime : MonoBehaviour
             Invoke("countDownTimer", 1.0f);
         }
 
-        else
+        else 
         {
-            Destroy(gameObject);
-            Destroy(GameObject.FindWithTag("JailPic"));
+            gameObject.SetActive(false);
+            GameObject.FindWithTag("JailPic").SetActive(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().UnfreezePlayer();
+			GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().UnlockCamera();
 
         }
     }
